@@ -1,0 +1,477 @@
+{
+  "schema": "medins-features/1",
+  "_说明": "产品形态特征词典：用于在记录字段（本次研究产品）与样本摘要目录（市场基线）上打标签，计算各特征在样本中的普及度与最早采用时间，生成“创新点候选”。fields=记录字段；overview=样本摘要字段；patterns 命中任一即视为具备，negative 命中则排除。",
+  "features": [
+    {
+      "key": "no_hd",
+      "label": "免健告准入",
+      "category": "核保准入",
+      "fields": [
+        "access_channel"
+      ],
+      "overview": [
+        "access_channel"
+      ],
+      "patterns": [
+        "免健告",
+        "无健康告知",
+        "免健康告知",
+        "无健告"
+      ],
+      "negative": [
+        "非免健告"
+      ]
+    },
+    {
+      "key": "simple_hd",
+      "label": "简易/宽松健告",
+      "category": "核保准入",
+      "fields": [
+        "access_channel"
+      ],
+      "overview": [
+        "access_channel"
+      ],
+      "patterns": [
+        "简易健告",
+        "简易健康告知",
+        "宽松健告",
+        "易核"
+      ]
+    },
+    {
+      "key": "data_screen_pricing",
+      "label": "医保数据筛查/风险分层定价",
+      "category": "核保准入",
+      "fields": [
+        "underwriting_tools",
+        "rate_factors",
+        "access_channel"
+      ],
+      "overview": [
+        "access_channel",
+        "premium_basis",
+        "deductible_coinsurance",
+        "premium_50m"
+      ],
+      "patterns": [
+        "医保(数据|授权)",
+        "风险等级",
+        "健康优选",
+        "数据筛查",
+        "AI优选"
+      ],
+      "negative": [
+        "未见[^；。]{0,16}(风险等级|健康优选|医保数据|筛查)",
+        "无(医保数据|风险等级|健康优选)"
+      ]
+    },
+    {
+      "key": "exam_upgrade",
+      "label": "体检核保分层升级保障",
+      "category": "核保准入",
+      "fields": [
+        "underwriting_tools",
+        "access_channel",
+        "plans"
+      ],
+      "overview": [
+        "access_channel",
+        "deductible_coinsurance"
+      ],
+      "patterns": [
+        "体检.{0,10}(核保|升级|分层)",
+        "升级.{0,8}体检"
+      ]
+    },
+    {
+      "key": "long_renewal",
+      "label": "保证续保≥5年",
+      "category": "续保机制",
+      "fields": [
+        "guaranteed_renewal",
+        "term"
+      ],
+      "overview": [
+        "term_renewal"
+      ],
+      "patterns": [
+        "保证续保\\s*([5-9]|[1-9]\\d)\\s*年",
+        "保续\\s*([5-9]|[1-9]\\d)\\s*年",
+        "保证续保.{0,4}终身",
+        "保证终身"
+      ],
+      "negative": [
+        "^不保证续保$"
+      ]
+    },
+    {
+      "key": "general_pre_payable",
+      "label": "一般既往症可赔",
+      "category": "既往症",
+      "fields": [
+        "preexisting_general",
+        "preexisting_special"
+      ],
+      "overview": [
+        "preexisting_special"
+      ],
+      "patterns": [
+        "一般既往症.{0,12}(可赔|可保可赔|赔付|按.{0,8}比例)",
+        "可保即可赔",
+        "一般既往症首年"
+      ],
+      "negative": [
+        "一般既往症.{0,6}(不赔|除外|不予)"
+      ],
+      "baseline_note": "样本摘要只记录“特殊可赔/不赔”，一般既往症可赔的普及度会被低估"
+    },
+    {
+      "key": "insurable_payable",
+      "label": "可保即可赔（通过健告后不另设既往症除外）",
+      "category": "既往症",
+      "fields": [
+        "preexisting_general",
+        "preexisting_special"
+      ],
+      "overview": [
+        "preexisting_special"
+      ],
+      "patterns": [
+        "可保即可赔",
+        "不另作既往症除外",
+        "无既往症除外",
+        "旧病不另作"
+      ]
+    },
+    {
+      "key": "pre_progressive",
+      "label": "既往症随连续投保逐步开放/递增额度",
+      "category": "既往症",
+      "fields": [
+        "preexisting_special",
+        "preexisting_general",
+        "first_year_rules"
+      ],
+      "overview": [
+        "preexisting_special",
+        "waiting_period"
+      ],
+      "patterns": [
+        "第\\s*[3-5三四五]\\s*年.{0,24}(既往|旧病)",
+        "逐年(增加|递增|提升)",
+        "连续投保.{0,24}(扩展|既往|旧病)",
+        "旧病限赔",
+        "第4年起"
+      ]
+    },
+    {
+      "key": "pre_first_year_option",
+      "label": "一般既往症首年比例分层（可选方案）",
+      "category": "既往症",
+      "fields": [
+        "preexisting_general",
+        "preexisting_special",
+        "plans",
+        "first_year_rules"
+      ],
+      "overview": [
+        "preexisting_special"
+      ],
+      "patterns": [
+        "既往症.{0,12}首年.{0,30}(50%|比例)",
+        "首年.{0,10}既往症.{0,20}(50%|比例)",
+        "既往症.{0,20}可选.{0,10}(50%|100%)",
+        "既往症.{0,30}(计划[一1]|首次投保).{0,30}50%",
+        "(计划[一1]|首次投保).{0,30}既往症.{0,30}50%"
+      ]
+    },
+    {
+      "key": "first_year_disease_reduction",
+      "label": "指定病种首年减赔",
+      "category": "赔付规则",
+      "fields": [
+        "first_year_rules",
+        "preexisting_special",
+        "coinsurance",
+        "deductible"
+      ],
+      "overview": [
+        "preexisting_special",
+        "deductible_coinsurance",
+        "waiting_period"
+      ],
+      "patterns": [
+        "首年.{0,24}(减赔|60%|×\\s*50%|再乘\\s*50%)",
+        "首年减赔",
+        "新保.{0,40}×\\s*50%",
+        "\\d+种(特定)?疾病首年"
+      ]
+    },
+    {
+      "key": "nodule_special_limit",
+      "label": "高危结节专项限额/条件可赔",
+      "category": "既往症",
+      "fields": [
+        "preexisting_special",
+        "nodules_three_highs",
+        "claim_special"
+      ],
+      "overview": [
+        "preexisting_special",
+        "nodules_three_highs"
+      ],
+      "patterns": [
+        "高危结节.{0,30}(专项|万元?免赔|限额|赔\\s*30%|赔付)",
+        "结节.{0,10}专项"
+      ]
+    },
+    {
+      "key": "health_task_ratio",
+      "label": "健康任务提升赔付比例",
+      "category": "健康管理",
+      "fields": [
+        "health_services",
+        "coinsurance",
+        "plans"
+      ],
+      "overview": [
+        "deductible_coinsurance"
+      ],
+      "patterns": [
+        "健康(管理)?任务.{0,24}(比例|\\+\\s*10|提升|升级)",
+        "完成.{0,12}任务.{0,24}(提升|升级|增加|\\+)"
+      ]
+    },
+    {
+      "key": "family_shared_deductible",
+      "label": "家庭共享免赔额",
+      "category": "赔付规则",
+      "fields": [
+        "deductible",
+        "claim_special"
+      ],
+      "overview": [
+        "deductible_coinsurance"
+      ],
+      "patterns": [
+        "共享免赔",
+        "家庭.{0,10}共享"
+      ]
+    },
+    {
+      "key": "deductible_decreasing",
+      "label": "无理赔免赔额递减",
+      "category": "赔付规则",
+      "fields": [
+        "deductible",
+        "claim_special"
+      ],
+      "overview": [
+        "deductible_coinsurance"
+      ],
+      "patterns": [
+        "无理赔.{0,24}(降|减|递减)",
+        "免赔.{0,12}递减",
+        "逐年递减",
+        "每年(各)?减\\s*\\d+"
+      ]
+    },
+    {
+      "key": "zero_deductible_tiered",
+      "label": "0免赔＋分段赔付比例",
+      "category": "赔付规则",
+      "fields": [
+        "deductible",
+        "coinsurance"
+      ],
+      "overview": [
+        "deductible_coinsurance"
+      ],
+      "patterns": [
+        "(^|[^\\d])0\\s*免赔.{0,40}(以内|以下|≤).{0,12}\\d{2}%",
+        "零免赔"
+      ]
+    },
+    {
+      "key": "rehab",
+      "label": "康复医疗保障",
+      "category": "保障责任",
+      "fields": [
+        "rehab"
+      ],
+      "overview": [
+        "rehab"
+      ],
+      "patterns": [
+        "康复"
+      ],
+      "negative": [
+        "^(—|-|无|未设|✘|不含)"
+      ]
+    },
+    {
+      "key": "outpatient",
+      "label": "普通/互联网门急诊保障",
+      "category": "保障责任",
+      "fields": [
+        "outpatient"
+      ],
+      "overview": [
+        "outpatient"
+      ],
+      "patterns": [
+        "门急诊.{0,20}(万|元|保额|限额)",
+        "在线问诊",
+        "可选.{0,8}门",
+        "附加.{0,10}门急诊"
+      ],
+      "negative": [
+        "^(—|-|无|未设|✘|不含)"
+      ]
+    },
+    {
+      "key": "special_drug",
+      "label": "院外特药",
+      "category": "保障责任",
+      "fields": [
+        "external_drugs"
+      ],
+      "overview": [
+        "external_drugs"
+      ],
+      "patterns": [
+        "特药",
+        "特定药品",
+        "抗癌.{0,6}药"
+      ],
+      "negative": [
+        "^(—|-|无|未设)"
+      ]
+    },
+    {
+      "key": "cart",
+      "label": "CAR-T 保障",
+      "category": "保障责任",
+      "fields": [
+        "external_drugs",
+        "advanced_therapy"
+      ],
+      "overview": [
+        "external_drugs",
+        "advanced_therapy"
+      ],
+      "patterns": [
+        "CAR-?T"
+      ]
+    },
+    {
+      "key": "urgent_import_drug",
+      "label": "临床急需进口药/重疾急需药",
+      "category": "保障责任",
+      "fields": [
+        "external_drugs"
+      ],
+      "overview": [
+        "external_drugs"
+      ],
+      "patterns": [
+        "临床急需",
+        "急需.{0,4}药"
+      ]
+    },
+    {
+      "key": "proton",
+      "label": "质子重离子",
+      "category": "先进疗法",
+      "fields": [
+        "advanced_therapy"
+      ],
+      "overview": [
+        "advanced_therapy"
+      ],
+      "patterns": [
+        "质子"
+      ]
+    },
+    {
+      "key": "bnct",
+      "label": "硼中子俘获治疗",
+      "category": "先进疗法",
+      "fields": [
+        "advanced_therapy"
+      ],
+      "overview": [
+        "advanced_therapy"
+      ],
+      "patterns": [
+        "硼中子",
+        "BNCT"
+      ]
+    },
+    {
+      "key": "photoimmuno",
+      "label": "光免疫疗法",
+      "category": "先进疗法",
+      "fields": [
+        "advanced_therapy"
+      ],
+      "overview": [
+        "advanced_therapy"
+      ],
+      "patterns": [
+        "光免疫"
+      ]
+    },
+    {
+      "key": "ttf",
+      "label": "肿瘤电场治疗",
+      "category": "先进疗法",
+      "fields": [
+        "advanced_therapy"
+      ],
+      "overview": [
+        "advanced_therapy"
+      ],
+      "patterns": [
+        "电场"
+      ]
+    },
+    {
+      "key": "private_hospital",
+      "label": "私立/特需/国际部医院扩展",
+      "category": "就医范围",
+      "fields": [
+        "hospital_scope",
+        "plans"
+      ],
+      "overview": [
+        "deductible_coinsurance",
+        "channel"
+      ],
+      "patterns": [
+        "私立",
+        "特需",
+        "国际部",
+        "VIP"
+      ]
+    },
+    {
+      "key": "direct_billing",
+      "label": "直付/直赔服务",
+      "category": "健康服务",
+      "fields": [
+        "health_services",
+        "hospital_scope"
+      ],
+      "overview": [
+        "outpatient",
+        "rehab"
+      ],
+      "patterns": [
+        "直付",
+        "直赔"
+      ]
+    }
+  ]
+}

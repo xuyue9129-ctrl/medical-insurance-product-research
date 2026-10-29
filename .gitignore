@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# 构建产物（发布时上传到 GitHub Releases，不入库）
+dist/
+
+# 研究工作区与个人数据（不要提交）
+medins_workspace/
+*_workspace/
+.medins-research/
+catalog_user.json
+
+# Office 临时文件 / 系统文件
+~$*
+*.tmp
+.DS_Store
+Thumbs.db
+desktop.ini

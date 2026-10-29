@@ -1,0 +1,2389 @@
+[
+  {
+    "id": "p70998ec0",
+    "company": "中华联合财险",
+    "insurer_full": "中华联合财产保险股份有限公司",
+    "product_name": "中华蓝鲸百万医疗保险（水滴蓝鲸）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p60d76bb6",
+    "company": "中华联合财险",
+    "insurer_full": "中华联合财产保险股份有限公司",
+    "product_name": "长相安3号医疗保险（合家版）",
+    "series": "长相安",
+    "series_line": "长相安·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p67bea47a",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿如E康悦百万医疗保险（A款）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p312fd119",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿如E康悦百万医疗保险（B款）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p8f0e4a9b",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿如E康悦百万医疗保险（C款）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p08f93e14",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿如E康悦百万医疗保险（盛典版）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p0ffae5ea",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿康医保惠享医疗保险（互联网专属）",
+    "series": "康医保",
+    "series_line": "康医保",
+    "aliases": [
+      "康医保惠享"
+    ],
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p08b840f0",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿康医保易享1.0医疗保险（互联网专属）",
+    "series": "康医保",
+    "series_line": "康医保",
+    "aliases": [
+      "康医保易享1.0"
+    ],
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p097e1364",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿康悦臻享医疗保险（费率可调）",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.e-chinalife.com/upload/resources/file/productBasicInfo/9b793382d11f413490bc51e1f54c45ec/100_%E5%9B%BD%E5%AF%BF%E5%BA%B7%E6%82%A6%E8%87%BB%E4%BA%AB%E5%8C%BB%E7%96%97%E4%BF%9D%E9%99%A9%28%E8%B4%B9%E7%8E%87%E5%8F%AF%E8%B0%83%29%E6%9D%A1%E6%AC%BE.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p8fc73c7c",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿心意康悦医疗保险",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.e-chinalife.com/c/2024-10-08/b35e2872-7726-47e3-b01f-98a329b4e896.shtml",
+      "https://www.e-chinalife.com/upload/resources/file/productBasicInfo/863d39ee536540f5a89da6a89037123b/300_%E5%9B%BD%E5%AF%BF%E5%BF%83%E6%84%8F%E5%BA%B7%E6%82%A6%E5%8C%BB%E7%96%97%E4%BF%9D%E9%99%A9%E4%BA%A7%E5%93%81%E8%AF%B4%E6%98%8E.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pf265382a",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿心无忧特定手术医疗保险（优享版）",
+    "product_type": "特定疾病/治疗专项医疗险",
+    "source_urls": [
+      "https://www.e-chinalife.com/upload/resources/file/productBasicInfo/c81745523a684dbabe58dc33b0221865/300_%E5%9B%BD%E5%AF%BF%E5%BF%83%E6%97%A0%E5%BF%A7%E7%89%B9%E5%AE%9A%E6%89%8B%E6%9C%AF%E5%8C%BB%E7%96%97%E4%BF%9D%E9%99%A9%28%E4%BC%98%E4%BA%AB%E7%89%88%29%E4%BA%A7%E5%93%81%E8%AF%B4%E6%98%8E.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pfd33fc83",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿爱意康悦百万医疗保险",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pb49fe3fc",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿爱无忧医疗保险",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.e-chinalife.com/c/2024-10-08/b35e2872-7726-47e3-b01f-98a329b4e896.shtml",
+      "https://www.e-chinalife.com/upload/resources/file/productBasicInfo/2f7300c653754b98a7bb8f02b53d6052/%E5%9B%BD%E5%AF%BF%E7%88%B1%E6%97%A0%E5%BF%A7%E5%8C%BB%E7%96%97%E4%BF%9D%E9%99%A9%E5%88%A9%E7%9B%8A%E6%9D%A1%E6%AC%BE%28%E5%90%88%E5%B9%B6%E6%9D%A1%E6%AC%BE%29.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pe1265910",
+    "company": "中国人寿",
+    "insurer_full": "中国人寿保险股份有限公司",
+    "product_name": "国寿糖安宝医疗保险（2021版）",
+    "product_type": "慢病专项医疗险",
+    "version": "2021",
+    "source_urls": [
+      "https://www.e-chinalife.com/upload/resources/file/2021/06/16/46153.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p39219462",
+    "company": "中意人寿",
+    "product_name": "中意人寿免健告医疗保险（中意e系列）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pdc301b5c",
+    "company": "中银保险",
+    "product_name": "中银全民保医疗保险（全国版）",
+    "series": "全民保",
+    "series_line": "全民保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p5e328e93",
+    "company": "京东安联",
+    "insurer_full": "京东安联财产保险有限公司",
+    "product_name": "京东安联臻爱无限医疗保险（2026版）",
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p7afed29b",
+    "company": "人保健康",
+    "insurer_full": "中国人民健康保险股份有限公司",
+    "product_name": "人保健康欣e保互联网医疗保险升级版",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://health.picc.com.cn/infomation/cpxx/rbjkwxcpxx/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pb11fe014",
+    "company": "人保健康",
+    "insurer_full": "中国人民健康保险股份有限公司",
+    "product_name": "人保健康欣e保医疗保险（肺结节版2022）",
+    "product_type": "慢病专项医疗险",
+    "version": "2022",
+    "source_urls": [
+      "https://health.picc.com.cn/infomation/cpxx/rbjkwxcpxx/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p925b1fc9",
+    "company": "人保健康",
+    "insurer_full": "中国人民健康保险股份有限公司",
+    "product_name": "人保金医保长期医疗保险（含3号）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p06fda349",
+    "company": "人保健康",
+    "insurer_full": "中国人民健康保险股份有限公司",
+    "product_name": "好医保·中老年长期医疗保险",
+    "series": "好医保",
+    "series_line": "好医保·长期医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pfca10e36",
+    "company": "人保健康",
+    "insurer_full": "中国人民健康保险股份有限公司",
+    "product_name": "好医保·长期医疗保险（旗舰版2026）",
+    "series": "好医保",
+    "series_line": "好医保·长期医疗",
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p5fd16919",
+    "company": "人保健康",
+    "insurer_full": "中国人民健康保险股份有限公司",
+    "product_name": "安心港湾药械保险（2023版）",
+    "series": "安心",
+    "series_line": "安心·特定疾病/治疗专项医疗险",
+    "product_type": "特定疾病/治疗专项医疗险",
+    "version": "2023",
+    "source_urls": [
+      "https://health.picc.com.cn/infomation/cpxx/rbjkwxcpxx/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p46bb0fa6",
+    "company": "人保健康",
+    "insurer_full": "中国人民健康保险股份有限公司",
+    "product_name": "欣e保医疗保险（肺结节版2023互联网）",
+    "product_type": "慢病专项医疗险",
+    "version": "2023",
+    "source_urls": [
+      "https://health.picc.com.cn/infomation/cpxx/rbjkwxcpxx/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pcef16dc6",
+    "company": "人保财险",
+    "insurer_full": "中国人民财产保险股份有限公司",
+    "product_name": "AI福安康百万医疗保险",
+    "series": "福安康",
+    "series_line": "福安康·百万医疗",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p7ca5e077",
+    "company": "人保财险",
+    "insurer_full": "中国人民财产保险股份有限公司",
+    "product_name": "人人安康百万医疗保险（0免赔额版）",
+    "series": "人人安康",
+    "series_line": "人人安康·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://property.picc.com/gkxx/zxxx/dqjkx/fwxx/202511/648335012722143232.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pafd63874",
+    "company": "人保财险",
+    "insurer_full": "中国人民财产保险股份有限公司",
+    "product_name": "人人安康百万医疗保险（众享版2026）",
+    "series": "人人安康",
+    "series_line": "人人安康·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p5140ec0e",
+    "company": "人保财险",
+    "insurer_full": "中国人民财产保险股份有限公司",
+    "product_name": "人人安康百万医疗保险（家庭版）",
+    "series": "人人安康",
+    "series_line": "人人安康·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://property.picc.com/gkxx/zxxx/dqjkx/fwxx/202511/648335012722143232.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p6a90b068",
+    "company": "人保财险",
+    "insurer_full": "中国人民财产保险股份有限公司",
+    "product_name": "人保一年期百万医疗保险（升级版）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p84a658fb",
+    "company": "人保财险",
+    "insurer_full": "中国人民财产保险股份有限公司",
+    "product_name": "人保一年期百万医疗保险（经典版）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p6dd87834",
+    "company": "人保财险",
+    "insurer_full": "中国人民财产保险股份有限公司",
+    "product_name": "慢病安康百万医疗保险（2025版）",
+    "product_type": "慢病专项医疗险",
+    "version": "2025",
+    "source_urls": [
+      "https://property.picc.com/gkxx/zxxx/dqjkx/fwxx/202511/648335012722143232.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p3938ab07",
+    "company": "人保财险",
+    "insurer_full": "中国人民财产保险股份有限公司",
+    "product_name": "长相安3号医疗保险（庆典版）",
+    "series": "长相安",
+    "series_line": "长相安·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p282ff3c8",
+    "company": "人保财险",
+    "insurer_full": "中国人民财产保险股份有限公司",
+    "product_name": "长相安5号中高端医疗保险（免健告版）",
+    "series": "长相安",
+    "series_line": "长相安·中高端",
+    "product_type": "中高端医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p1a60e576",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "乐橙肺结节保险保障方案",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf",
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p4a8e5d28",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "京东百万医疗保险（慢病版）",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pc5cebd1e",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众安个人住院医疗保险（互联网甲状腺结节扩展版）",
+    "product_type": "住院医疗险",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1688113874167.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p147910f6",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众安亲民保医疗保险",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p3d1bf474",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众安全医保百万医疗保险（无健告版）",
+    "series": "全医保",
+    "series_line": "全医保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pe75b48c3",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众安百万医疗慢病守护保",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pe12d169f",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众安百万医疗险普惠版",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf",
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p5ca21103",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众安百万医疗险（全民无忧新版）",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p459a9b15",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众民保·中高端医疗2025",
+    "series": "众民保",
+    "series_line": "众民保·中高端",
+    "aliases": [
+      "众民保·中高端医疗保险（2025版）"
+    ],
+    "product_type": "中高端医疗险",
+    "version": "2025",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p655ad768",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众民保·中高端医疗2026（活动版）",
+    "series": "众民保",
+    "series_line": "众民保·中高端",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p10397d41",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众民保·中高端医疗险2026",
+    "series": "众民保",
+    "series_line": "众民保·中高端",
+    "aliases": [
+      "众民保·中高端医疗2026",
+      "众民保中高端2026",
+      "众民保中高端26"
+    ],
+    "product_type": "中高端医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pbf42c05c",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众民保·中高端医疗险（2026活动版·历史营销版本）",
+    "series": "众民保",
+    "series_line": "众民保·中高端",
+    "product_type": "中高端医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pfb0ee5b5",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众民保·百万医疗2025（后期版）",
+    "series": "众民保",
+    "series_line": "众民保·百万医疗",
+    "version": "2025",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p85f8d8d4",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众民保·百万医疗2026",
+    "series": "众民保",
+    "series_line": "众民保·百万医疗",
+    "aliases": [
+      "众民保2026",
+      "众民保·百万医疗险2026",
+      "众民保百万2026"
+    ],
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [
+      "https://www.zhongan.com/productlist/36-4"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p070f1ad9",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众民保·百万医疗保险（2025版）",
+    "series": "众民保",
+    "series_line": "众民保·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2025",
+    "source_urls": [
+      "https://m.zhongan.com/gp/97488264",
+      "https://www.zhongan.com/productlist/36-4"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pb5b5df37",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众民保医疗保险（马拉松版）",
+    "series": "众民保",
+    "series_line": "众民保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p4a000aea",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众民保普惠百万医疗保险（普惠版）",
+    "series": "众民保",
+    "series_line": "众民保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pcc972433",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众民惠医疗保险（全国版）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pd48feb2c",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "众结安心医疗保险",
+    "series": "安心",
+    "series_line": "安心·慢病专项",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf",
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pfbbc9cd7",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "优享保·百万医疗险",
+    "series": "优享保",
+    "series_line": "优享保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pdbd1bbab",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "全医保·百万医疗保险（当前渠道版）",
+    "series": "全医保",
+    "series_line": "全医保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p64e27dbc",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "全国普惠保医疗保险（含升级版）",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf",
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pdbaf7384",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "全民普惠保医疗保险（惠民版）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p5a9aa9c5",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "全民普惠保医疗保险（慢病版）",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pca456e15",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "全民普惠保医疗保险（无忧版）",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pcd4a3ec1",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "全能保·住院医疗保险（免健告版）",
+    "series": "全能保",
+    "series_line": "全能保·住院医疗",
+    "product_type": "住院医疗险",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p4cbfe46d",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "好医保·住院医疗（城乡版）",
+    "series": "好医保",
+    "series_line": "好医保·住院医疗",
+    "product_type": "住院医疗险",
+    "source_urls": [
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p07462380",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "守护星百万医疗险（全民普惠版）",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p804abf6c",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "安稳e生住院医疗保险（糖尿病高血压专属版）",
+    "product_type": "住院医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pefc84f6a",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "尊享e生·中高端医疗保险PLUS（2025版）",
+    "series": "尊享e生",
+    "series_line": "尊享e生·中高端",
+    "product_type": "中高端医疗险",
+    "version": "2025",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1761294842552.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p4a103921",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "尊享e生·中高端医疗保险（2025版）",
+    "series": "尊享e生",
+    "series_line": "尊享e生·中高端",
+    "product_type": "中高端医疗险",
+    "version": "2025",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p6f215feb",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "尊享e生医疗保险（2021慢病版）",
+    "series": "尊享e生",
+    "series_line": "尊享e生·慢病专项",
+    "product_type": "慢病专项医疗险",
+    "version": "2021",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pcf7139fa",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "尊享e生医疗保险（优甲版）",
+    "series": "尊享e生",
+    "series_line": "尊享e生·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p4ec9bb0e",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "尊享e生普惠版（含2023版）",
+    "series": "尊享e生",
+    "series_line": "尊享e生·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2023",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf",
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p7d43c1fd",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "尊享e生爸妈版（2020版/升级版）",
+    "series": "尊享e生",
+    "series_line": "尊享e生·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2020",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf",
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pd41bd0d8",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "尊享e生百万医疗保险（2023版）",
+    "series": "尊享e生",
+    "series_line": "尊享e生·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2023",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pc20d17f8",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "慢病无忧保医疗保险",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf",
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pc1a155ee",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "普惠无忧保家庭版",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p184c2256",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "点滴保·普惠百万医疗险",
+    "series": "点滴保",
+    "series_line": "点滴保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pbbabfa3c",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "爱肝保医疗保障方案",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://open.zhongan.com/portal/site/solution/health"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p55cb12b5",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "爸妈安康保百万医疗保险",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://static.zhongan.com/upload/online/material/1655283161137.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p9b19efd6",
+    "company": "众安在线",
+    "insurer_full": "众安在线财产保险股份有限公司",
+    "product_name": "轻松保·众安惠医保升级PLUS2026",
+    "series": "轻松保",
+    "series_line": "轻松保·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [
+      "https://www.zhongan.com/channel/public/publicInfo_dqjkbx2021.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p499eed39",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "众享保·百万医疗",
+    "series": "众享保",
+    "series_line": "众享保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202505%2F06102528kxdh.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pc88ab985",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "众惠全能百万医疗保险（2025简易健告版·个人）",
+    "product_type": "百万医疗险",
+    "version": "2025",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202506%2F121036024ko6.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p6badfa03",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "众惠全能百万医疗保险（2025简易健告版·家庭）",
+    "product_type": "百万医疗险",
+    "version": "2025",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202506%2F121036024ko6.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pb44ce421",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "众惠爱肝保障计划",
+    "product_type": "特定疾病/治疗专项医疗险",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202506%2F121036024ko6.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pab96e341",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "众惠百万普惠保Plus医疗保险（互联网专属）",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202506%2F121036024ko6.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p43c25b53",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "众惠非标百万医疗保险（三高Pro版）",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202506%2F121036024ko6.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p1e812147",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "周灌保·血液灌流医疗费用保险",
+    "series": "周灌保",
+    "series_line": "周灌保·特定疾病/治疗专项医疗险",
+    "product_type": "特定疾病/治疗专项医疗险",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202407%2F011425514mvw.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p29c211cc",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "惠享e生慢病百万医疗保险",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202506%2F121036024ko6.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pccf9a11d",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "惠享e生慢病百万医疗保险（进阶版）",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p467ff0b2",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "控压卫士高血压并发症保险",
+    "product_type": "特定疾病/治疗专项医疗险",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202506%2F121036024ko6.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p06212b3d",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "普惠e生·全民医疗保险",
+    "series": "普惠e生",
+    "series_line": "普惠e生·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pf85136e5",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "甲旁安·慢性肾脏病继发性甲旁亢医疗保险",
+    "series": "甲旁安",
+    "series_line": "甲旁安·特定疾病/治疗专项医疗险",
+    "product_type": "特定疾病/治疗专项医疗险",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202407%2F011425514mvw.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pef154478",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "肾安保·并发症住院医疗保险（关爱版）",
+    "series": "肾安保",
+    "series_line": "肾安保·住院医疗",
+    "product_type": "住院医疗险",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202407%2F011425514mvw.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p46cf290d",
+    "company": "众惠相互",
+    "insurer_full": "众惠财产相互保险社",
+    "product_name": "肾爱保·爱多多住院医疗保险",
+    "series": "肾爱保",
+    "series_line": "肾爱保·住院医疗",
+    "product_type": "住院医疗险",
+    "source_urls": [
+      "https://static.pubmi.org/%2Fu%2Fcms%2Fwww%2F202407%2F011425514mvw.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p3a9ba5aa",
+    "company": "君龙人寿",
+    "insurer_full": "君龙人寿保险有限公司",
+    "product_name": "君龙暖医保医疗保险（无健告·互联网专属）",
+    "series": "暖医保",
+    "series_line": "暖医保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pcd0ef4f4",
+    "company": "君龙人寿",
+    "insurer_full": "君龙人寿保险有限公司",
+    "product_name": "君龙臻爱无忧2.0医疗保险（互联网）",
+    "series": "臻爱无忧",
+    "series_line": "臻爱无忧",
+    "aliases": [
+      "臻爱无忧2.0互联网"
+    ],
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p4df0c636",
+    "company": "君龙人寿",
+    "insurer_full": "君龙人寿保险有限公司",
+    "product_name": "臻爱无忧中端医疗保险3.0",
+    "series": "臻爱无忧",
+    "series_line": "臻爱无忧·中高端",
+    "aliases": [
+      "臻爱无忧中端3.0"
+    ],
+    "product_type": "中高端医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pb272b6af",
+    "company": "国寿财险",
+    "insurer_full": "中国人寿财产保险股份有限公司",
+    "product_name": "惠享保·百万医疗保险（免健告版）",
+    "series": "惠享保",
+    "series_line": "惠享保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p87ca7634",
+    "company": "国泰产险",
+    "insurer_full": "国泰财产保险有限责任公司",
+    "product_name": "全民百万医疗（简易健告）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pec56802d",
+    "company": "复星联合健康",
+    "insurer_full": "复星联合健康保险股份有限公司",
+    "product_name": "超越保无忧版长期住院医疗保险（费率可调·互联网版）",
+    "series": "超越保",
+    "series_line": "超越保·长期医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://fosun-uhi.com/PublicInformation/BasicInformation/ProductInformation"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p696ec8d7",
+    "company": "大地财险",
+    "insurer_full": "中国大地财产保险股份有限公司",
+    "product_name": "大地MSH欣享人生2026个人医疗保险（不含既往症版）",
+    "series": "欣享人生",
+    "series_line": "欣享人生·中高端",
+    "product_type": "中高端医疗险",
+    "version": "2026",
+    "source_urls": [
+      "https://www.ccic-net.com.cn/upload/resources/file/2026/06/03/QVWDCRV0KBXDSPN3EQ5XSSB2KQ.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p6ebecf47",
+    "company": "大地财险",
+    "insurer_full": "中国大地财产保险股份有限公司",
+    "product_name": "大地MSH欣享人生2026个人医疗保险（含既往症版）",
+    "series": "欣享人生",
+    "series_line": "欣享人生·中高端",
+    "product_type": "中高端医疗险",
+    "version": "2026",
+    "source_urls": [
+      "https://www.ccic-net.com.cn/upload/resources/file/2026/06/03/QVWDCRV0KBXDSPN3EQ5XSSB2KQ.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pda562f18",
+    "company": "大地财险",
+    "insurer_full": "中国大地财产保险股份有限公司",
+    "product_name": "欣享易生2026版·A款",
+    "series": "欣享易生2026版",
+    "series_line": "欣享易生2026版",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p49b7b64d",
+    "company": "大地财险",
+    "insurer_full": "中国大地财产保险股份有限公司",
+    "product_name": "欣享易生2026版·B款",
+    "series": "欣享易生2026版",
+    "series_line": "欣享易生2026版",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p49c7b56a",
+    "company": "大地财险",
+    "insurer_full": "中国大地财产保险股份有限公司",
+    "product_name": "欣享易生个人住院医疗保险（2026版）",
+    "series": "欣享易生",
+    "series_line": "欣享易生·中高端",
+    "product_type": "中高端医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pa80f506c",
+    "company": "太保产险",
+    "insurer_full": "中国太平洋财产保险股份有限公司",
+    "product_name": "太享保·免健告中高端医疗保险（2025版）",
+    "series": "太享保",
+    "series_line": "太享保·中高端",
+    "aliases": [
+      "太享保·免健告中高端医疗保险"
+    ],
+    "product_type": "中高端医疗险",
+    "version": "2025",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pc8d1ce81",
+    "company": "太保产险",
+    "insurer_full": "中国太平洋财产保险股份有限公司",
+    "product_name": "太享保·免健告百万医疗保险（2025版）",
+    "series": "太享保",
+    "series_line": "太享保·百万医疗",
+    "aliases": [
+      "太享保·免健告百万医疗保险"
+    ],
+    "product_type": "百万医疗险",
+    "version": "2025",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p5343cb2d",
+    "company": "太保产险",
+    "insurer_full": "中国太平洋财产保险股份有限公司",
+    "product_name": "太健康·全能保医疗保险",
+    "series": "太健康",
+    "series_line": "太健康·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p03343f10",
+    "company": "太保产险",
+    "insurer_full": "中国太平洋财产保险股份有限公司",
+    "product_name": "太健康·全能保百万医疗保险（H2025A互联网个人版）",
+    "series": "太健康",
+    "series_line": "太健康·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2025",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "paec7f33e",
+    "company": "太保健康",
+    "insurer_full": "太平洋健康保险股份有限公司",
+    "product_name": "太保互联网个人中高端住院B款医疗保险（蓝医保2025特需直付版）",
+    "series": "蓝医保",
+    "series_line": "蓝医保·中高端",
+    "product_type": "中高端医疗险",
+    "version": "2025",
+    "source_urls": [
+      "https://sh.cpic.com.cn/c/2025-05-29/1872240.shtml"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p5e0fbb28",
+    "company": "太保健康",
+    "insurer_full": "太平洋健康保险股份有限公司",
+    "product_name": "太保家安芯医疗保险（2.0版）",
+    "series": "家安芯",
+    "series_line": "家安芯·慢病专项",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://health.cpic.com.cn/c/2023-08-25/1641375.shtml"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pc5362460",
+    "company": "太保健康",
+    "insurer_full": "太平洋健康保险股份有限公司",
+    "product_name": "太保家安芯医疗保险（H2022B）",
+    "series": "家安芯",
+    "series_line": "家安芯·慢病专项",
+    "product_type": "慢病专项医疗险",
+    "version": "2022",
+    "source_urls": [
+      "https://life.cpic.com.cn/upload/resources/file/2024/05/24/80889.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p58499227",
+    "company": "太保健康",
+    "insurer_full": "太平洋健康保险股份有限公司",
+    "product_name": "太平洋保险普惠免健告医疗保险（10年期）",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://health.cpic.com.cn/jkx/gkxxpl/hlwbxxx/hlwbxcpxx/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p218df53b",
+    "company": "太保健康",
+    "insurer_full": "太平洋健康保险股份有限公司",
+    "product_name": "太平洋健康10年长期医疗保险",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.cpic.com.cn/market/ylx/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p04bf93ad",
+    "company": "太保健康",
+    "insurer_full": "太平洋健康保险股份有限公司",
+    "product_name": "蓝医保·中高端医疗险（2025特需直付版）",
+    "series": "蓝医保",
+    "series_line": "蓝医保·中高端",
+    "version": "2025",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pbc9b59ab",
+    "company": "太保健康",
+    "insurer_full": "太平洋健康保险股份有限公司",
+    "product_name": "蓝医保·中高端医疗险（2026版）",
+    "series": "蓝医保",
+    "series_line": "蓝医保·中高端",
+    "product_type": "中高端医疗险",
+    "version": "2026",
+    "source_urls": [
+      "https://www.cpic.com.cn/c/2026-06-23/1884024.shtml",
+      "https://mcdn.cpiccdn.com/c/2026-06-18/1883989.shtml"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p6cc294b9",
+    "company": "太保健康",
+    "insurer_full": "太平洋健康保险股份有限公司",
+    "product_name": "蓝医保·免健告百万医疗（2027）",
+    "series": "蓝医保",
+    "series_line": "蓝医保·百万医疗",
+    "aliases": [
+      "太保免健告百万2027",
+      "蓝医保2027",
+      "蓝医保免健告百万医疗2027"
+    ],
+    "product_type": "百万医疗险",
+    "version": "2027",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p1a089052",
+    "company": "太保健康",
+    "insurer_full": "太平洋健康保险股份有限公司",
+    "product_name": "蓝医保·免健告长期医疗险（有福版）",
+    "series": "蓝医保",
+    "series_line": "蓝医保·长期医疗",
+    "aliases": [
+      "有福版",
+      "蓝医保有福版"
+    ],
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.cpic.com.cn/c/2026-06-23/1884131.shtml"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pc60d174b",
+    "company": "太保健康",
+    "insurer_full": "太平洋健康保险股份有限公司",
+    "product_name": "蓝医保·百万医疗险（免健告版）",
+    "series": "蓝医保",
+    "series_line": "蓝医保·百万医疗",
+    "aliases": [
+      "蓝医保2025免健告",
+      "蓝医保免健告版",
+      "蓝医保百万免健告"
+    ],
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://mcdn.cpiccdn.com/c/2026-06-18/1883989.shtml",
+      "https://www.cpic.com.cn/c/2025-12-01/1878698.shtml"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p7229e64e",
+    "company": "太保寿险",
+    "insurer_full": "中国太平洋人寿保险股份有限公司",
+    "product_name": "太保家安芯2.0（H2023A）",
+    "series": "家安芯",
+    "series_line": "家安芯",
+    "version": "2023",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pc8e95a36",
+    "company": "太保寿险",
+    "insurer_full": "中国太平洋人寿保险股份有限公司",
+    "product_name": "太保家安芯2.0（H2023B）",
+    "series": "家安芯",
+    "series_line": "家安芯",
+    "version": "2023",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p93380eee",
+    "company": "太保寿险",
+    "insurer_full": "中国太平洋人寿保险股份有限公司",
+    "product_name": "太保家安芯（H2022A）",
+    "series": "家安芯",
+    "series_line": "家安芯",
+    "version": "2022",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p01675d2a",
+    "company": "太保寿险",
+    "insurer_full": "中国太平洋人寿保险股份有限公司",
+    "product_name": "太保家安芯（H2022B）",
+    "series": "家安芯",
+    "series_line": "家安芯",
+    "version": "2022",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pc979d3f1",
+    "company": "太保寿险",
+    "insurer_full": "中国太平洋人寿保险股份有限公司",
+    "product_name": "家安芯3.0（H2025A）",
+    "series": "家安芯",
+    "series_line": "家安芯",
+    "aliases": [
+      "太保家安芯3.0（H2025A）"
+    ],
+    "version": "2025",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p46d1c9be",
+    "company": "太保寿险",
+    "insurer_full": "中国太平洋人寿保险股份有限公司",
+    "product_name": "家安芯3.0（H2025B）",
+    "series": "家安芯",
+    "series_line": "家安芯",
+    "aliases": [
+      "太保家安芯3.0（H2025B）"
+    ],
+    "version": "2025",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pcc2b7452",
+    "company": "太保寿险",
+    "insurer_full": "中国太平洋人寿保险股份有限公司",
+    "product_name": "家安芯百万医疗保险2.0（H2023A款）",
+    "series": "家安芯",
+    "series_line": "家安芯·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2023",
+    "source_urls": [
+      "https://www.cpic.com.cn/upload/resources/file/2025/06/27/87732.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pf4d63f84",
+    "company": "太保寿险",
+    "insurer_full": "中国太平洋人寿保险股份有限公司",
+    "product_name": "家安芯百万医疗保险2.0（H2023B款）",
+    "series": "家安芯",
+    "series_line": "家安芯·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2023",
+    "source_urls": [
+      "https://www.cpic.com.cn/upload/resources/file/2025/06/27/87732.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p23a66d64",
+    "company": "太保寿险",
+    "insurer_full": "中国太平洋人寿保险股份有限公司",
+    "product_name": "家安芯百万医疗保险（H2022A款）",
+    "series": "家安芯",
+    "series_line": "家安芯·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2022",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p67f83519",
+    "company": "太保寿险",
+    "insurer_full": "中国太平洋人寿保险股份有限公司",
+    "product_name": "家安芯百万医疗保险（H2022B款）",
+    "series": "家安芯",
+    "series_line": "家安芯·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2022",
+    "source_urls": [
+      "https://life.cpic.com.cn/upload/resources/file/2022/05/16/65345.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pb4cff8be",
+    "company": "太平产险",
+    "insurer_full": "太平财产保险有限公司",
+    "product_name": "太平医保无忧医疗保险（2021版）",
+    "product_type": "慢病专项医疗险",
+    "version": "2021",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pb120d48e",
+    "company": "太平产险",
+    "insurer_full": "太平财产保险有限公司",
+    "product_name": "太平医保无忧医疗保险（2023版）",
+    "product_type": "慢病专项医疗险",
+    "version": "2023",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "paad2582b",
+    "company": "太平产险",
+    "insurer_full": "太平财产保险有限公司",
+    "product_name": "易享保·百万医疗保险（含特定癌症复发医疗责任版）",
+    "series": "易享保",
+    "series_line": "易享保·百万医疗",
+    "product_type": "百万医疗险（含特定癌症复发医疗责任）",
+    "source_urls": [
+      "https://caixian.cntaiping.com/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p4948c970",
+    "company": "太平人寿",
+    "insurer_full": "太平人寿保险有限公司",
+    "product_name": "太平孝心宝老年医疗保险（2018版）",
+    "product_type": "百万医疗险",
+    "version": "2018",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "peea07d9f",
+    "company": "太平人寿",
+    "insurer_full": "太平人寿保险有限公司",
+    "product_name": "太平超e保医疗保险（2021慢病版）",
+    "product_type": "慢病专项医疗险",
+    "version": "2021",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p04c38571",
+    "company": "太平人寿",
+    "insurer_full": "太平人寿保险有限公司",
+    "product_name": "太平超e保医疗保险（孝心版）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pb6e81ef6",
+    "company": "太平人寿",
+    "insurer_full": "太平人寿保险有限公司",
+    "product_name": "太平超e保百万医疗保险（2021版）",
+    "product_type": "百万医疗险",
+    "version": "2021",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p46902f41",
+    "company": "安盛天平财险",
+    "insurer_full": "安盛天平财产保险有限公司",
+    "product_name": "卓越环球个人医疗保险（智选无忧·2026版）",
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pbf7e8f19",
+    "company": "安盛天平财险",
+    "insurer_full": "安盛天平财产保险有限公司",
+    "product_name": "安盛天平个人综合住院医疗保险（2025版B款·互联网专属）",
+    "product_type": "住院医疗险",
+    "version": "2025",
+    "source_urls": [
+      "https://www.axa-tp.com"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p07ca124f",
+    "company": "安盛天平财险",
+    "insurer_full": "安盛天平财产保险有限公司",
+    "product_name": "馨选无忧医疗保险",
+    "product_type": "中高端医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p18829ca6",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "全守护·百万医疗保险（元保定制2026版）",
+    "series": "全守护",
+    "series_line": "全守护·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p7676dcc9",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "平安人生免健告中高端医疗保险（互联网版）",
+    "product_type": "中高端医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p98df5af4",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "平安北极星中高端医疗保险（免健告版）",
+    "product_type": "中高端医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pa520af3d",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "平安医无忧·中高端医疗保险（免健告版）",
+    "series": "医无忧",
+    "series_line": "医无忧·中高端",
+    "product_type": "中高端医疗险",
+    "source_urls": [
+      "https://www.pingan.com/official/productSeo/f21f60429f2d46c3a"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pd498b31b",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "平安医无忧·免健告百万医疗保险（一家两代版）",
+    "series": "医无忧",
+    "series_line": "医无忧·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://pingan.com/official/productSeo/85138a4366c5497e8d064"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p3acd8036",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "平安医无忧·免健告百万医疗保险（含体检版）",
+    "series": "医无忧",
+    "series_line": "医无忧·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://pingan.com/official/productSeo/85138a4366c5497e8d064"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p6effbabc",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "平安医无忧·全民医疗保险（免健告版）",
+    "series": "医无忧",
+    "series_line": "医无忧·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://pingan.com/official/productSeo/85138a4366c5497e8d0646d0b9a436f9"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "peb3dd886",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "平安医无忧·慢病百万医疗保险",
+    "series": "医无忧",
+    "series_line": "医无忧·百万医疗",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://www.pingan.com/official/productSeo/e0ef99b9e5454e258c330d11dfaaf370"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p23517797",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "平安医补保·免健告百万医疗保险（蚂蚁保渠道版）",
+    "series": "医补保",
+    "series_line": "医补保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p6db50d49",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "平安守护·免健告百万医疗保险（官网新版）",
+    "series": "守护",
+    "series_line": "守护·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://pingan.com/official/productSeo/ecf2c179a48540388a7b3"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p24904e6d",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "平安守护·免健告百万医疗保险（早期官网版）",
+    "series": "守护",
+    "series_line": "守护·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.pingan.com/official/productSeo/b24010fa86ca49e9ab7f052ef2066290"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pa54d122d",
+    "company": "平安产险",
+    "insurer_full": "中国平安财产保险股份有限公司",
+    "product_name": "平安易民保医疗保险（2.0版）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pc2779caf",
+    "company": "平安人寿",
+    "insurer_full": "中国平安人寿保险股份有限公司",
+    "product_name": "平安安医保（优享版）医疗保险",
+    "series": "安医保",
+    "series_line": "安医保",
+    "aliases": [
+      "优享版"
+    ],
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p33f6acaa",
+    "company": "平安人寿",
+    "insurer_full": "中国平安人寿保险股份有限公司",
+    "product_name": "平安安医保（尊享易核版）医疗保险",
+    "series": "安医保",
+    "series_line": "安医保·中高端",
+    "aliases": [
+      "尊享易核版"
+    ],
+    "product_type": "中高端医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p592ba7c0",
+    "company": "平安人寿",
+    "insurer_full": "中国平安人寿保险股份有限公司",
+    "product_name": "平安安医保（尊享版）医疗保险",
+    "series": "安医保",
+    "series_line": "安医保",
+    "aliases": [
+      "尊享版"
+    ],
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p3446c025",
+    "company": "平安人寿",
+    "insurer_full": "中国平安人寿保险股份有限公司",
+    "product_name": "平安安医保（易核26）医疗保险",
+    "series": "安医保",
+    "series_line": "安医保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p0da0636a",
+    "company": "平安人寿",
+    "insurer_full": "中国平安人寿保险股份有限公司",
+    "product_name": "平安安医保（易核版）医疗保险",
+    "series": "安医保",
+    "series_line": "安医保·百万医疗",
+    "aliases": [
+      "易核版历史版本"
+    ],
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pec510f32",
+    "company": "平安人寿",
+    "insurer_full": "中国平安人寿保险股份有限公司",
+    "product_name": "平安附加安医保特定医疗保险",
+    "series": "安医保",
+    "series_line": "安医保",
+    "aliases": [
+      "附加安医保普通版"
+    ],
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p13cf8ad5",
+    "company": "平安人寿",
+    "insurer_full": "中国平安人寿保险股份有限公司",
+    "product_name": "平安附加安医保（易核）特定医疗保险",
+    "series": "安医保",
+    "series_line": "安医保·附加特定医疗保险",
+    "product_type": "附加特定医疗保险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pd4739591",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "宽松健告·平安长期百万医疗\n平安互联网重度恶性肿瘤1.0医疗保险（费率可调）T款条款\n平安附加互联网诚爱1.0长期医疗保险（费率可调）T款条款",
+    "series": "宽松健告",
+    "series_line": "宽松健告·长期医疗",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pe3c850d7",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "平安e惠保百万医疗保险",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://health.pingan.com/P/C/PAH/Products_mall"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p02d990de",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "平安e生保·全家保2026（易保版）",
+    "series": "e生保",
+    "series_line": "e生保·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p1167c5f9",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "平安e生保·全民版2026医疗保险",
+    "series": "e生保",
+    "series_line": "e生保·百万医疗",
+    "aliases": [
+      "平安e生保·全民版2026"
+    ],
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [
+      "https://health.pingan.com/health_new/news/articles/1441151880758570847",
+      "https://www.pingan.com/official/insurance"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p4c604e29",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "平安e生保·易保版医疗保险（当前版）",
+    "series": "e生保",
+    "series_line": "e生保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://health.pingan.com/P/C/PAH/Products_mall",
+      "https://health.pingan.com/P/C/PAH/ylbxxin"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pd7efc9b4",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "平安e生保医疗保险（特定慢病版·2023版）",
+    "series": "e生保",
+    "series_line": "e生保·慢病专项",
+    "product_type": "慢病专项医疗险",
+    "version": "2023",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p6d607002",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "平安e生保阖家欢1.0医疗保险",
+    "series": "e生保",
+    "series_line": "e生保·中高端",
+    "product_type": "家庭医疗险（百万医疗/中高端可组合）",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pcbb8af46",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "平安e生安心中端医疗保险（易保版2.0）",
+    "series": "e生安心",
+    "series_line": "e生安心·中高端",
+    "aliases": [
+      "平安e生安心中端医疗·易保版2.0"
+    ],
+    "product_type": "中高端医疗险",
+    "source_urls": [
+      "https://www.pingan.com/official/productSeo/bb62441218644a039"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pd5fdcf17",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "平安i康保个人医疗保险（慢病版）",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://resources.pingan.com/app_upload/file/health/H868.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p7c7bae25",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "平安i康保老年医疗保险（三高版）",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://www.pingan.com/app_upload/images/info/upload/d108850e-b79b-42b1-8364-3ef06c2e2359.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p1e4bdb0f",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "平安互联网颐享易保高端医疗保险",
+    "product_type": "中高端医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p4d1deb2f",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "平安安医保·易核纯享版医疗保险",
+    "series": "安医保",
+    "series_line": "安医保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p599e84b9",
+    "company": "平安健康",
+    "insurer_full": "平安健康保险股份有限公司",
+    "product_name": "长期医疗（宽松版组合）",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p35e66aa9",
+    "company": "德华安顾人寿",
+    "insurer_full": "德华安顾人寿保险有限公司",
+    "product_name": "全医保·免健告医疗保险（5年版）",
+    "series": "全医保",
+    "series_line": "全医保·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p8b00f973",
+    "company": "德华安顾人寿",
+    "insurer_full": "德华安顾人寿保险有限公司",
+    "product_name": "心医保长期医疗保险（免健告版）",
+    "product_type": "百万医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p2850988c",
+    "company": "德华安顾人寿",
+    "insurer_full": "德华安顾人寿保险有限公司",
+    "product_name": "暖医保中高端医疗险（无健告）",
+    "series": "暖医保",
+    "series_line": "暖医保·中高端",
+    "product_type": "中高端医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pa1503253",
+    "company": "新华人寿",
+    "insurer_full": "新华人寿保险股份有限公司",
+    "product_name": "医药安欣（易核版）医疗保险",
+    "series": "医药安欣",
+    "series_line": "医药安欣·百万医疗",
+    "aliases": [
+      "医药安欣（易核版）"
+    ],
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.newchinalife.com/info/3096",
+      "https://www.newchinalife.com/spage/serviceCenterUnderstandinD23/index.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p9440f617",
+    "company": "新华人寿",
+    "insurer_full": "新华人寿保险股份有限公司",
+    "product_name": "康健华尊医疗保险（费率可调）",
+    "series": "康健华尊",
+    "series_line": "康健华尊·百万医疗",
+    "aliases": [
+      "康健华尊"
+    ],
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://static-cdn.newchinalife.com/ncl/pdf/20231009/bfb3a77b-f720-49af-b2a8-4a51fd009c6a.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pdd79e422",
+    "company": "新华人寿",
+    "insurer_full": "新华人寿保险股份有限公司",
+    "product_name": "康健华贵医疗保险（B款·附加型）",
+    "series": "康健华贵医疗保险（B款",
+    "series_line": "康健华贵医疗保险（B款·住院医疗",
+    "product_type": "住院医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p0f3a2018",
+    "company": "泰康人寿",
+    "insurer_full": "泰康人寿保险有限责任公司",
+    "product_name": "泰康健康心享A款（庆典版）医疗保险（费率可调）",
+    "series": "健康心享",
+    "series_line": "健康心享",
+    "aliases": [
+      "心享A款庆典版"
+    ],
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pf0adf04f",
+    "company": "泰康人寿",
+    "insurer_full": "泰康人寿保险有限责任公司",
+    "product_name": "泰康健康心享B款（庆典版）医疗保险（费率可调）",
+    "series": "健康心享",
+    "series_line": "健康心享",
+    "aliases": [
+      "心享B款庆典版"
+    ],
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pde549a2a",
+    "company": "泰康人寿",
+    "insurer_full": "泰康人寿保险有限责任公司",
+    "product_name": "泰康健康心享（易享版）医疗保险",
+    "series": "健康心享",
+    "series_line": "健康心享·个人医疗保险",
+    "aliases": [
+      "健康心享（易享版）"
+    ],
+    "product_type": "个人医疗保险",
+    "source_urls": [
+      "https://www.taikanglife.com/publicinfonew/basicnew/pubproduct/commonprodinfonew/list_542_1.html"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p52c661b2",
+    "company": "泰康人寿",
+    "insurer_full": "泰康人寿保险有限责任公司",
+    "product_name": "泰康附加健康心享A款（庆典版）医疗保险（费率可调）",
+    "series": "健康心享",
+    "series_line": "健康心享",
+    "aliases": [
+      "附加心享A款庆典版"
+    ],
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p1ac95b7c",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "医小康慢病百万医疗保险",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pdfbb892d",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "医药无忧中高端医疗保险（免健告版）",
+    "series": "医药无忧",
+    "series_line": "医药无忧·中高端",
+    "aliases": [
+      "医药无忧中高端医疗险（免健告）"
+    ],
+    "product_type": "中高端医疗险",
+    "source_urls": [
+      "https://tk.cn/tkcms/article/0bbf9460ea48268f69475032861525e1.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pe94ceb7e",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "守护者·全民普惠医疗保险",
+    "series": "守护者",
+    "series_line": "守护者·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://tk.cn/tkcms/article/1aba18e37f7121d0d8a42cd251a8acf7.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p35ec613c",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "微医保·百万医疗保险（普惠版2026）",
+    "series": "微医保",
+    "series_line": "微医保·百万医疗",
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "paaca9283",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "微医保·高端百万医疗险（一般既往症计划）",
+    "series": "微医保",
+    "series_line": "微医保·中高端",
+    "product_type": "中高端医疗险",
+    "source_urls": [
+      "https://policy.taikang.com/service/yljgypqd/yljg/index4.html",
+      "https://www.tk.cn/tkcms//file/upload/tkonline2020/gwfwzx/%E5%BE%AE%E5%8C%BB%E4%BF%9D%C2%B7%E7%99%BE%E4%B8%87%E5%8C%BB%E7%96%97%E9%99%A9%EF%BC%88%E9%AB%98%E7%AB%AF%E7%89%88%EF%BC%89%E3%80%8A%E7%89%B9%E7%A7%8D%E8%8D%AF%E5%93%81%E6%B8%85%E5%8D%95%E3%80%8B%E3%80%81%E3%80%8A%E7%89%B9%E5%AE%9A%E5%8C%BB%E7%96%97%E5%99%A8%E6%9D%90%E6%B8%85%E5%8D%95%E3%80%8B%E3%80%81%E3%80%8A%E7%89%B9%E5%AE%9A%E5%8C%BB%E5%AD%A6%E6%A3%80%E6%9F%A5%E6%B8%85%E5%8D%95%E3%80%8B_20240322133511213.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p2ef9ba8a",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰全能·医药无忧中高端医疗保险（免健告版）",
+    "series": "泰全能",
+    "series_line": "泰全能·中高端",
+    "product_type": "中高端医疗险",
+    "source_urls": [
+      "https://tk.cn/service/yljgypqd/yljg/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pf11a9bef",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰全能·慢病百万医疗保险（经典版）",
+    "series": "泰全能",
+    "series_line": "泰全能·百万医疗",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://tk.cn/service/yljgypqd/yljg/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pb4dfeb05",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰全能·慢病百万医疗保险（轻享版）",
+    "series": "泰全能",
+    "series_line": "泰全能·百万医疗",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://tk.cn/service/yljgypqd/yljg/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p8ad18e18",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰全能·百万医疗保险（免健告版）",
+    "series": "泰全能",
+    "series_line": "泰全能·百万医疗",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://tk.cn/service/yljgypqd/yljg/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pb98a169e",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰康全人群百万医疗保险",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pd2d2f52b",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰康在线百万医疗保险（2026全民版）",
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [
+      "https://tk.cn/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p477be7c4",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰康慢病保医疗保险（5.0全面版）",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://tk.cn/service/yljgypqd/yljg/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p061efba9",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰康慢病保医疗保险（普惠版）",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pea37e483",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰康慢病保医疗保险（甄选版）",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://tk.cn/service/yljgypqd/yljg/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p3e489eb7",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰康泰享无忧中端医疗保险（免健告版）",
+    "series": "泰享无忧",
+    "series_line": "泰享无忧·中高端",
+    "aliases": [
+      "泰享无忧中端医疗险（免健告）"
+    ],
+    "product_type": "中高端医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p27514904",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰心安·心血管介入手术医疗保险",
+    "series": "泰心安",
+    "series_line": "泰心安·特定疾病/治疗专项医疗险",
+    "product_type": "特定疾病/治疗专项医疗险",
+    "source_urls": [
+      "https://tk.cn/service/yljgypqd/yljg/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p72fd7e09",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰放心·慢病人群百万医疗保险（2026版）",
+    "series": "泰放心",
+    "series_line": "泰放心·百万医疗",
+    "product_type": "慢病专项医疗险",
+    "version": "2026",
+    "source_urls": [
+      "https://tk.cn/"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pabeabea2",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰爱保百万医疗保险（慢病全能版）",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://tk.cn/tkcms/article/8c1cac9bd0fd23c32078cc5ed19246c9.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p8c1b5ef6",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "泰爱保百万医疗保险（慢病版）",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pd8d26a55",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "肺无忧医疗保险",
+    "product_type": "慢病专项医疗险",
+    "source_urls": [
+      "https://mcdn.tk.cn/tkcms/file/upload/tk/file_xbxxpl/gwhlwbxcpxxpl.pdf"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "pcfd6675d",
+    "company": "泰康在线",
+    "insurer_full": "泰康在线财产保险股份有限公司",
+    "product_name": "腾讯微保结节关爱金",
+    "product_type": "特定疾病/治疗专项医疗险",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "pc7b1ee2c",
+    "company": "瑞华健康",
+    "insurer_full": "瑞华健康保险股份有限公司",
+    "product_name": "瑞华医保加百万医疗保险（普惠版）",
+    "product_type": "百万医疗险",
+    "source_urls": [
+      "https://www.ruihuahealth.com/",
+      "https://www.ruihuahealth.com/informationDisclosure"
+    ],
+    "origin": "seed"
+  },
+  {
+    "id": "p87adb219",
+    "company": "融盛财险",
+    "insurer_full": "融盛财产保险股份有限公司",
+    "product_name": "融医保医疗保险（2026个人版·免健告）",
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  },
+  {
+    "id": "p0a07ca42",
+    "company": "融盛财险",
+    "insurer_full": "融盛财产保险股份有限公司",
+    "product_name": "融医保医疗保险（2026家庭版·免健告）",
+    "product_type": "百万医疗险",
+    "version": "2026",
+    "source_urls": [],
+    "origin": "seed"
+  }
+]

@@ -1,0 +1,11 @@
+# 必需
+openpyxl>=3.0
+# PDF 解析（至少装一个；推荐 pymupdf，费率表表格另用 pdfplumber 更稳）
+pymupdf>=1.22
+pdfplumber>=0.10
+pypdf>=3.0
+# 可选：Word 报告、汇报 PPT、网络下载与网页解析更稳健
+python-docx>=0.8.11
+python-pptx>=0.6.21
+requests>=2.25
+beautifulsoup4>=4.9

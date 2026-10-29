@@ -1,0 +1,8 @@
+# 统一使用 LF，保证 Windows / macOS / Linux 检出内容一致
+* text=auto eol=lf
+*.pdf binary
+*.png binary
+*.jpg binary
+*.xlsx binary
+*.docx binary
+*.zip binary

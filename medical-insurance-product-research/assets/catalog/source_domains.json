@@ -1,0 +1,29 @@
+{
+  "_说明": "用于自动建议证据等级：保险公司官网见 companies.json 的 domains；下列为持牌中介/平台、监管与行业平台、媒体。仅为建议，研究者可用 --evidence-level 覆盖。",
+  "platforms": [
+    {"name": "慧择", "domains": ["huize.com", "m.huize.com"], "kind": "持牌中介"},
+    {"name": "开心保（网金保险）", "domains": ["kaixinbao.com", "resource.kaixinbao.com"], "kind": "持牌中介"},
+    {"name": "小雨伞", "domains": ["xiaoyusan.com"], "kind": "持牌中介"},
+    {"name": "深蓝保", "domains": ["shenlanbao.com"], "kind": "持牌中介/内容平台"},
+    {"name": "蚂蚁保", "domains": ["alipay.com", "ur.alipay.com", "ssr.alipay.com", "antgroup.com"], "kind": "持牌中介/平台"},
+    {"name": "齐欣云服", "domains": ["qixin19.com", "cps.qixin19.com"], "kind": "持牌中介/平台"}
+  ],
+  "regulators": [
+    {"name": "中国保险行业协会", "domains": ["iachina.cn", "rsxcpk.iachina.cn", "cxcx.iachina.cn", "icid.iachina.cn", "icidp.iachina.cn"], "kind": "行业信息披露"},
+    {"name": "国家金融监督管理总局", "domains": ["nfra.gov.cn"], "kind": "监管"},
+    {"name": "香港交易所披露易", "domains": ["hkexnews.hk", "www1.hkexnews.hk"], "kind": "上市公司公告"}
+  ],
+  "media": [
+    {"name": "沃保网", "domains": ["vobao.com", "news.vobao.com"]},
+    {"name": "新浪财经", "domains": ["sina.com.cn", "finance.sina.com.cn"]},
+    {"name": "财联社", "domains": ["cls.cn"]},
+    {"name": "新华网", "domains": ["xinhuanet.com", "app.xinhuanet.com"]},
+    {"name": "每日经济新闻", "domains": ["nbd.com.cn"]},
+    {"name": "中国经济网", "domains": ["ce.cn", "finance.ce.cn"]},
+    {"name": "中国财经时报网", "domains": ["3news.cn", "m.3news.cn"]},
+    {"name": "投资界", "domains": ["pedaily.cn"]},
+    {"name": "中国网", "domains": ["china.com", "china.com.cn"]},
+    {"name": "陕西日报", "domains": ["sxdaily.com.cn"]},
+    {"name": "向日葵保险网", "domains": ["xiangrikui.com"]}
+  ]
+}
