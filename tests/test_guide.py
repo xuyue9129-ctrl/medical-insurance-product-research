@@ -97,10 +97,15 @@ class GuideTest(TempWorkspaceCase):
         run_compare(self.ws)
         run_innovation(self.ws)
         r = next_steps(self.ws)
-        self.assertEqual(r["stage"], "补充同业对照")
-        self.assertIn("一般既往症可赔", r["steps"][0]["do"])
-        self.assertIn("--role peer", r["steps"][1]["cmd"])
-        self.assertEqual(medins.main(["peers", "-w", str(self.ws.root), "--skip", "--reason", "测试"]), 0)
+        self.assertEqual(r["stage"], "全网核验创新点")
+        self.assertIn("general_pre_payable", r["steps"][0]["do"])
+        self.assertIn("market add", r["steps"][1]["cmd"])
+        from medins_lib.market import pending_features
+        for f in pending_features(self.ws):
+            self.assertEqual(medins.main(["market", "none", "-w", str(self.ws.root), "--feature", f["key"],
+                                          "--query", f"{f['label']} 医疗险", "--query", f"{f['label']} 条款", "--note", "官网与行业协会产品库"]), 0)
+        self.assertEqual(next_steps(self.ws)["stage"], "重新识别创新点")
+        run_innovation(self.ws)
         self.assertEqual(next_steps(self.ws)["stage"], "撰写对比判断")
         # 登记同业对照后：先整理同业产品（只需条款与对照字段），整理完再要求重新识别创新点
         self.ws.register({"company": "另一家健康", "product_name": "另一款免健告医疗", "role": "peer"})

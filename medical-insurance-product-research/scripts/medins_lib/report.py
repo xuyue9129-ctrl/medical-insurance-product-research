@@ -18,6 +18,7 @@ from .common import MedinsError, read_json, today, truncate, write_text
 from .doctypes import DOC_TYPES
 from .fetch import completeness, load_manifest
 from .innovation import needs_judgment
+from .market import describe
 from .records import field_map, load_record
 from .workspace import Workspace
 
@@ -195,10 +196,11 @@ def build_report(ws: Workspace, pids: list[str] | None = None, out_dir: Path | N
     L += ["## 四、创新点识别", ""]
     base = inn.get("baseline", {})
     peers = "、".join(x["name"] for x in base.get("peers", []))
-    L += [f"对每款产品的标准化字段做特征打标，与对照样本（样本摘要目录 {base.get('builtin_samples', 0)} 款、本次研究 "
+    L += [f"对每款产品的标准化字段做特征打标，与对照样本（市场样本库 {base.get('builtin_samples', 0)} 款、本次研究 "
           f"{base.get('workspace_products', 0)} 款、同业对照 {base.get('peer_products', 0)} 款{('：' + peers) if peers else ''}）"
           f"比较普及度、最早采用时间及是否为本系列新增。某特征的对照产品少于 {base.get('min_peers', 5)} 款时，"
-          "只按行业先验区分“行业常见/跟进”，其余标“样本不足·待补对照”，不判断首见或少见。“首见”仅指样本内；"
+          "只按行业先验区分“行业常见/跟进”，其余不判断首见或少见。对可能的创新点另做全网核验：联网检索全市场同类产品，"
+          "命中的记录链接并核验页面原文，未命中的记录检索词与来源（全网未见同类仅指截至检索日的检索范围）；"
           "仅有营销稿或媒体报道（C/D 级）支撑的特征不认定为创新；候选判定之外以研究者结论为准。", ""]
     judg = analysis.get("innovations") or {}
     k = 0
@@ -223,11 +225,11 @@ def build_report(ws: Workspace, pids: list[str] | None = None, out_dir: Path | N
                 for e in (c.get("evidence") or [])[:2]:
                     eref += fmt_refs(refs_for(idx, pid, e["field"])[:1])
                 rows.append([c["label"], c["verdict"], {True: "是", False: "否", None: "—"}[c.get("new_in_series")],
-                             f"{c['peers_with']}/{c['peers_total']}",
+                             f"{c['peers_with']}/{c['peers_total']}", describe(c.get("market") or {}),
                              "；".join(f"{x['name']}（{x['launch'] or '—'}）" for x in c["peer_examples"][:2]) or "无",
                              truncate(c.get("product_snippet", ""), 60) + eref, "；".join(c.get("flags", [])) or "—"])
             L += [caption(f"{info['product']}的候选特征（{'脚本判定，供复核' if jl else '待研究者判断'}）"), "",
-                  _md_table(["特征", "候选判定", "本系列新增", "样本普及度", "同业示例", "原文依据", "提示"], rows), ""]
+                  _md_table(["特征", "候选判定", "本系列新增", "样本普及度", "全网核验", "同业示例", "原文依据", "提示"], rows), ""]
     if k == 0:
         L += ["未发现样本内少见或本系列新增的特征。", ""]
 
@@ -280,8 +282,19 @@ def build_report(ws: Workspace, pids: list[str] | None = None, out_dir: Path | N
             rows.append([pname(p), d["doc_type_name"], d["file"], d.get("pages") or "", d.get("evidence_level"),
                          d["sha256"][:16], src.get("url") or "本地导入", (src.get("retrieved_at") or "")[:10]])
     L += [_md_table(["产品", "类型", "文件", "页数", "证据等级", "SHA256(前16位)", "来源链接", "获取日期"], rows), ""]
+    from .market import load_scan
+    scan = load_scan(ws).get("features", {})
+    if scan:
+        L += ["## 附录C　全网核验记录", "", caption("全网核验记录", True), ""]
+        rows = []
+        for k, f in scan.items():
+            for h in f.get("hits") or [None]:
+                rows.append([f.get("label") or k, "命中" if h else "检索未见", (h or {}).get("product", "—"), (h or {}).get("launch", ""),
+                             truncate((h or {}).get("quote", ""), 80), (h or {}).get("match", ""), (h or {}).get("url") or (h or {}).get("file", ""),
+                             "；".join(f.get("queries", [])) or "—", (f.get("updated_at") or "")[:10]])
+        L += [_md_table(["特征", "结果", "同类产品", "上市时间", "页面原文", "核验", "链接", "检索词", "日期"], rows), ""]
     if problems:
-        L += ["## 附录C　报告自检提示", ""] + [f"{i}．{x}" for i, x in enumerate(problems, 1)] + [""]
+        L += [f"## 附录{'D' if scan else 'C'}　报告自检提示", ""] + [f"{i}．{x}" for i, x in enumerate(problems, 1)] + [""]
 
     md = "\n".join(L)
     out_dir = out_dir or ws.outputs_dir

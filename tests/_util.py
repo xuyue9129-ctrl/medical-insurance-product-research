@@ -33,6 +33,8 @@ class TempWorkspaceCase(unittest.TestCase):
         self.tmp = Path(tempfile.mkdtemp(prefix="medins_test_"))
         self._old_home = os.environ.get("MEDINS_HOME")
         os.environ["MEDINS_HOME"] = str(self.tmp / "home")
+        self._old_mk = os.environ.get("MEDINS_MARKET_SAMPLES")
+        os.environ["MEDINS_MARKET_SAMPLES"] = "0"  # 默认不加载内置市场样本，测试结果可控；专门的测试会打开
         from medins_lib.workspace import Workspace
         self.ws = Workspace(self.tmp / "ws")
         self.ws.init("测试研究")
@@ -42,4 +44,8 @@ class TempWorkspaceCase(unittest.TestCase):
             os.environ.pop("MEDINS_HOME", None)
         else:
             os.environ["MEDINS_HOME"] = self._old_home
+        if self._old_mk is None:
+            os.environ.pop("MEDINS_MARKET_SAMPLES", None)
+        else:
+            os.environ["MEDINS_MARKET_SAMPLES"] = self._old_mk
         shutil.rmtree(self.tmp, ignore_errors=True)

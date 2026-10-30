@@ -120,22 +120,21 @@ def next_steps(ws: Workspace) -> dict:
     if inn is None:
         return {"stage": "对比与创新点", "done": False, "progress": progress, "steps": [
             {"do": "生成横向/版本对比与创新点候选", "cmd": _cmd(ws, "compare") + " && " + _cmd(ws, "innovate")}]}
-    if {x["pid"] for x in (inn.get("baseline") or {}).get("peers", [])} != set(ws.peer_pids()):
+    from .market import MIN_QUERIES, pending_features, signature
+    base = inn.get("baseline") or {}
+    if {x["pid"] for x in base.get("peers", [])} != set(ws.peer_pids()) or base.get("market_signature", "") != signature(ws):
         return {"stage": "重新识别创新点", "done": False, "progress": progress, "steps": [
-            {"do": "同业对照产品已整理完，重新运行创新点识别（对照样本会计入新增的同业产品）", "cmd": _cmd(ws, "innovate")}]}
-    from .innovation import INSUFFICIENT, MIN_PEERS, insufficient_features
-    lack = insufficient_features(ws)
-    if lack and not cfg.get("peer_skip"):
-        totals = [c["peers_total"] for info in (inn.get("products") or {}).values() for c in info["candidates"] if c["verdict"] == INSUFFICIENT]
-        need = max(1, MIN_PEERS - min(totals or [0]))
-        return {"stage": "补充同业对照", "done": False, "progress": progress, "steps": [
-            {"do": f"以下候选特征的对照样本不足 {MIN_PEERS} 款，不能判断是否首见/少见：{'、'.join(f['label'] for f in lack)}。"
-                   f"先查看推荐的同业对照产品（同类型、不同系列，附官网链接）", "cmd": _cmd(ws, "peers")},
-            {"do": f"挑选至少 {need} 款与研究对象同类的产品登记为同业对照（可用推荐列表的 id；目录外产品用 --company/--product）。"
-                   "登记后 next 会引导：归档其条款 → 登记备案条款名 → 只整理与上述特征相关的字段（同样逐字引文核验）",
-             "cmd": _cmd(ws, "register") + " --from-catalog <id> --role peer"},
-            {"do": "确实无法补充（如无联网、同类产品条款取不到）时，写明原因后跳过；对比判断的结论边界必须写明样本不足",
-             "cmd": _cmd(ws, "peers") + ' --skip --reason "<原因>"'}]}
+            {"do": "全网核验记录或同业对照有更新，重新运行创新点识别（命中的同类产品会计入对照）", "cmd": _cmd(ws, "innovate")}]}
+    pend = pending_features(ws)
+    if pend:
+        return {"stage": "全网核验创新点", "done": False, "progress": progress, "steps": [
+            {"do": f"判断创新要对照整个市场，不能只看内置样本。以下候选特征需要联网核验：{'、'.join(f['label'] + '（' + f['key'] + '）' for f in pend)}。"
+                   "先查看每个特征的建议检索词", "cmd": _cmd(ws, "market")},
+            {"do": "逐个特征用你的联网搜索检索全市场（保险公司官网信息披露、行业协会产品库、持牌中介平台的条款与产品页）。"
+                   "找到具备该特征的其他产品就记录，脚本会下载页面并核验原文；同一特征找到 3 款即可停止",
+             "cmd": _cmd(ws, "market add") + ' --feature <特征key> --product "<公司·产品>" --url <链接> --quote "<页面原文逐字>" --launch <YYYY-MM>'},
+            {"do": f"换用至少 {MIN_QUERIES} 组关键词仍未找到，记录“检索未见”及查过的来源",
+             "cmd": _cmd(ws, "market none") + ' --feature <特征key> --query "<关键词1>" --query "<关键词2>" --note "<查过的来源>"'}]}
     if not comparison_judged(ws):
         steps = [{"do": "生成 analysis.json 骨架（已填好版本对与候选特征）", "cmd": _cmd(ws, "template") + " --analysis"}]             if not ws.analysis_path.exists() else []
         steps.append({"do": f"打开 {ws.analysis_path}，先完成对比判断：version_notes（每对新旧版本的主要变化）与 innovations"
@@ -262,6 +261,7 @@ def analysis_filled(ws: Workspace) -> bool:
 
 def write_analysis_template(ws: Workspace) -> Path:
     from .innovation import needs_judgment
+    from .market import describe
     inn = read_json(ws.outputs_dir / "创新点候选.json", {}) or {}
     cmp = read_json(ws.outputs_dir / "对比结果.json", {}) or {}
     data = {
@@ -270,6 +270,7 @@ def write_analysis_template(ws: Workspace) -> Path:
         "version_notes": {f"{v['old']['pid']}->{v['new']['pid']}": "" for v in cmp.get("versions", [])},
         "innovations": {pid: [{"feature": c["feature"], "label": c["label"], "_候选判定": c["verdict"],
                                "_本系列新增": c.get("new_in_series"), "_对照样本": f"{c['peers_with']}/{c['peers_total']} 款具备",
+                               "_全网核验": describe(c.get("market") or {}),
                                "_提示": "；".join(c.get("flags", [])), "verdict": "", "summary": "", "risk_logic": "", "boundary": ""}
                               for c in info["candidates"] if needs_judgment(c)]
                         for pid, info in (inn.get("products") or {}).items()},

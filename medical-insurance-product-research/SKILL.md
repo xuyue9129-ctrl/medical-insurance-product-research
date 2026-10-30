@@ -38,7 +38,7 @@ python <SKILL_DIR>/scripts/medins.py next -w <工作区>     # ① 看当前阶�
 | 把旧版本条款用于新版本 | 先 `register --clause-name` 登记备案条款名，`verify-docs` 显示 matched 才用 |
 | validate 有 error 就出报告 | error 清零后再 `build` |
 | 对比表做完就直接生成报告/PPT，或直接结束 | 先问用户要不要报告和 PPT，再 `deliver` 登记 |
-| 对照样本只有一两款就写“首见/独创” | 候选为“样本不足·待补对照”时先补同业对照；补不了就在结论边界写明样本不足 |
+| 只和内置样本或手头几款产品比，就写“首见/独创” | 先 `market` 全网核验：找到同类就记录，换 ≥2 组关键词仍未找到才算“全网未见同类”，并在结论边界写明检索日期与范围 |
 
 ## 何时使用
 - 用户给出一个或多个医疗险产品名（可能是简称、错别字、只写年份或系列，如“蓝医保2027”“众民保中高端26”“长相安5号”），要求查条款/费率/健告、整理产品形态、做对比、看版本变化或创新点、出 Excel/报告。
@@ -120,7 +120,16 @@ python <SKILL_DIR>/scripts/medins.py validate -w <工作区>
 python <SKILL_DIR>/scripts/medins.py compare -w <工作区> [--pair 旧pid:新pid]   # 同系列自动按上市时间配对
 python <SKILL_DIR>/scripts/medins.py innovate -w <工作区>
 ```
-`innovate` 只给“候选”（样本内首见/少见差异化/行业常见、是否本系列新增、同业示例）。某特征的对照产品不足 5 款时，行业普遍配置按先验判为“行业常见/跟进（先验）”，其余标“样本不足·待补对照”，`next` 会引导你用 `peers` 挑选同业对照产品、`register --from-catalog <id> --role peer` 登记并只整理对照字段（同样逐字引文），再重新 `innovate`；确实补不了就 `peers --skip --reason` 并在结论边界写明。你要按 [references/innovation_method.md](references/innovation_method.md) 判断是否**真正的创新**（改变了谁能买、赔什么、怎么定价/分层，而不是换个名字或跟进常见责任）。`template --analysis` 生成 `<工作区>/analysis.json` 骨架，先写**对比判断**：
+`innovate` 只给“候选”（样本内首见/少见差异化/行业常见、是否本系列新增、同业示例），对照样本是本次研究产品 + 内置市场样本库。**判断创新必须对照整个市场**：候选里凡是“样本内首见 / 少见差异化 / 样本不足”的特征，`next` 会停在“全网核验创新点”，你要用联网搜索检索全市场同类产品（保险公司官网、行业协会产品库、持牌中介平台条款，不限于内置样本）：
+```bash
+python <SKILL_DIR>/scripts/medins.py market -w <工作区>          # 待核验特征 + 建议检索词
+python <SKILL_DIR>/scripts/medins.py market add -w <工作区> --feature general_pre_payable --product "<公司·产品>" --url <链接> --quote "<页面原文>" --launch 2025-06
+python <SKILL_DIR>/scripts/medins.py market none -w <工作区> --feature general_pre_payable --query "<关键词1>" --query "<关键词2>" --note "<查过的来源>"
+python <SKILL_DIR>/scripts/medins.py innovate -w <工作区>        # 命中的产品计入对照后重新判定
+```
+`market add` 会下载页面核验原文（动态页面在浏览器另存为 .html/.pdf 后用 `--file`）；同一特征找到 3 款即可停止。重新判定后：全网都没找到的为“全网未见同类”（附检索日期与检索词），找到的按实际款数判为“少见差异化”或“行业常见/跟进”。按 [references/innovation_method.md](references/innovation_method.md) 判断是否**真正的创新**（改变了谁能买、赔什么、怎么定价/分层，而不是换个名字或跟进常见责任）。（可选）需要更细的对照时，可用 `peers` 挑选同业产品，`register --from-catalog <id> --role peer` 登记并只整理对照字段。
+
+`template --analysis` 生成 `<工作区>/analysis.json` 骨架，先写**对比判断**：
 ```json
 {
   "version_notes": {"<旧pid>-><新pid>": "主险由F款换为H款[[<新pid>:clause_names]]；免赔额…[[<新pid>:deductible]]"},
@@ -136,8 +145,8 @@ python <SKILL_DIR>/scripts/medins.py innovate -w <工作区>
 python <SKILL_DIR>/scripts/medins.py build -w <工作区>     # = validate → compare → innovate → excel；--mode series|market 可强制版式
 ```
 对比表版式按样本自动选择：
-- **同系列版本对比**（series）：说明、①系列总览（维度×版本，含责任覆盖速查 ✔/✘/◐ 与保费速览，差异维度浅青底）、②保障责任明细（按计划展开）、③保费对比（46–50 岁档高亮）、④健告与既往症、⑤版本对比、⑥创新点识别、⑦证据索引、⑧资料清单、⑨校验结果。
-- **多产品横比**（market）：说明、①产品总览（每行一款，按“产品基本信息 / 投保与健康告知 / 既往症与理赔 / 核心额度与特殊责任 / 保费”分组，冻结前三列，可筛选）、②严重既往症对比（含病种速查）、③产品演进与趋势、④核心发现、⑤维度对比、⑥保障责任明细、⑦保费对比、⑧健告与既往症、⑨创新点识别、⑩证据索引、⑪资料清单、⑫校验结果。
+- **同系列版本对比**（series）：说明、①系列总览（维度×版本，含责任覆盖速查 ✔/✘/◐ 与保费速览，差异维度浅青底）、②保障责任明细（按计划展开）、③保费对比（46–50 岁档高亮）、④健告与既往症、⑤版本对比、⑥创新点识别、⑦全网核验、⑧证据索引、⑨资料清单、⑩校验结果。
+- **多产品横比**（market）：说明、①产品总览（每行一款，按“产品基本信息 / 投保与健康告知 / 既往症与理赔 / 核心额度与特殊责任 / 保费”分组，冻结前三列，可筛选）、②严重既往症对比（含病种速查）、③产品演进与趋势、④核心发现、⑤维度对比、⑥保障责任明细、⑦保费对比、⑧健告与既往症、⑨创新点识别、⑩全网核验、⑪证据索引、⑫资料清单、⑬校验结果。
 
 ### 7. 询问并生成报告与 PPT
 对比表完成后**询问用户是否需要分析报告（Word）和汇报 PPT**，按回答登记：

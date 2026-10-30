@@ -484,7 +484,7 @@ def cmd_innovate(args):
 
     def human(d):
         b = d["baseline"]
-        print(f"对照样本：样本摘要目录 {b['builtin_samples']} 款 + 本次研究 {b['workspace_products']} 款 + 同业对照 {b['peer_products']} 款"
+        print(f"对照样本：市场样本库 {b['builtin_samples']} 款 + 本次研究 {b['workspace_products']} 款 + 同业对照 {b['peer_products']} 款"
               f"（某特征的对照产品少于 {b['min_peers']} 款时不判断首见/少见）")
         for pid, info in d["products"].items():
             top = [c for c in info["candidates"] if needs_judgment(c)]
@@ -570,6 +570,45 @@ def cmd_peers(args):
             print(f"  {s_['id']}  {s_['company']}·{s_['product_name']}  {s_['product_type'] or ''}  {(s_['source_urls'] or [''])[0]}")
         print(f"登记：python <SKILL_DIR>/scripts/medins.py register -w \"{ws.root}\" --from-catalog <id> --role peer")
         print(f"跳过：python <SKILL_DIR>/scripts/medins.py peers -w \"{ws.root}\" --skip --reason \"<原因>\"")
+    _out(args, res, human)
+
+
+def cmd_market(args):
+    from medins_lib.innovation import load_features
+    from medins_lib.market import MIN_QUERIES, add_hit, load_scan, mark_none, pending_features, queries_for
+    ws = _ws(args)
+    if args.action == "add":
+        h = add_hit(ws, args.feature, args.product or "", args.url or "", args.quote or "", args.launch or "", args.file,
+                    args.note or "", args.allow_unverified)
+        _out(args, h, lambda d: print(f"已记录 {args.feature}：{d['product']}（引文核验：{d.get('match')}，证据 {d.get('evidence_level')}）"
+                                      f"{chr(10) + '  ⚠ ' + d['error'] if d.get('error') else ''}"))
+        return
+    if args.action == "none":
+        f = mark_none(ws, args.feature, args.query or [], args.note or "")
+        _out(args, f, lambda d: print(f"已记录 {args.feature}：全网检索未见同类（检索词 {len(d['queries'])} 组）"))
+        return
+    fm = {f["key"]: f for f in load_features()}
+    scan = load_scan(ws).get("features", {})
+    pend = pending_features(ws)
+    res = {"pending": [{"feature": f["key"], "label": f["label"], "queries": queries_for(f)} for f in pend],
+           "recorded": {k: {"label": v.get("label"), "status": v.get("status"), "hits": [h["product"] for h in v.get("hits", [])],
+                            "queries": v.get("queries", [])} for k, v in scan.items()}}
+
+    def human(d):
+        if d["pending"]:
+            print(f"待全网核验的特征（每个特征：找到同类就 market add；换 ≥{MIN_QUERIES} 组关键词仍未找到就 market none）：")
+            for x in d["pending"]:
+                print(f"  {x['feature']}  {x['label']}")
+                print(f"    建议检索词：{'；'.join(x['queries'])}")
+        else:
+            print("没有待核验的特征")
+        for k, v in d["recorded"].items():
+            st = f"命中 {len(v['hits'])} 款：{'、'.join(v['hits'])}" if v["hits"] else f"检索未见（{'；'.join(v['queries'])}）"
+            print(f"  [已记录] {k} {fm.get(k, {}).get('label', '')}：{st}")
+        print(f"记录命中：python <SKILL_DIR>/scripts/medins.py market add -w \"{ws.root}\" --feature <key> --product \"<公司·产品>\" "
+              "--url <链接> --quote \"<页面原文>\" --launch <YYYY-MM>")
+        print(f"记录未见：python <SKILL_DIR>/scripts/medins.py market none -w \"{ws.root}\" --feature <key> --query \"<关键词1>\" "
+              "--query \"<关键词2>\" --note \"<查过的来源>\"")
     _out(args, res, human)
 
 
@@ -794,7 +833,18 @@ def build_parser() -> argparse.ArgumentParser:
             p.add_argument("--template", help="自有 .pptx 模板（默认读 ~/.medins-research/config.json 的 ppt_template）")
             p.add_argument("--no-template", action="store_true", help="忽略默认模板，使用内置版式")
             p.add_argument("--org", help="封面署名（部门/机构）")
-    p = add("peers", cmd_peers, "补充同业对照：列出需要对照的特征与推荐产品；--skip --reason 说明原因后跳过")
+    p = add("market", cmd_market, "全网核验创新点：list 查看待核验特征与检索词；add 记录同类产品（自动核验页面原文）；none 记录检索未见")
+    p.add_argument("action", nargs="?", default="list", choices=["list", "add", "none"])
+    p.add_argument("--feature", help="特征 key，如 general_pre_payable（market list 可查看）")
+    p.add_argument("--product", help="同类产品：公司·产品名")
+    p.add_argument("--url", help="页面或条款链接（脚本会下载核验）")
+    p.add_argument("--file", help="动态页面无法下载时：浏览器另存的 .html/.pdf 文件")
+    p.add_argument("--quote", help="页面中证明具备该特征的原文（逐字）")
+    p.add_argument("--launch", help="该产品上市时间 YYYY-MM（用于判断谁更早）")
+    p.add_argument("--query", action="append", help="none 用：检索词（至少 2 组，可多次）")
+    p.add_argument("--note", help="none 用：查过哪些来源；add 用：补充说明")
+    p.add_argument("--allow-unverified", action="store_true", help="页面无法抓取时仍记录命中（标“未核验”）")
+    p = add("peers", cmd_peers, "（可选）同业对照：推荐可整理的同类产品；--skip --reason 说明原因后跳过")
     p.add_argument("--limit", type=int, default=10)
     p.add_argument("--skip", action="store_true")
     p.add_argument("--reason")

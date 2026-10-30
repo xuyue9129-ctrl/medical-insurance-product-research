@@ -1,9 +1,11 @@
 """创新点识别：特征打标 + 市场基线对照 + 版本新增判断，生成“创新点候选”，由研究者给出最终判断。
 
-基线（对照样本）=
+对照样本 =
   1. 本工作区其他研究产品的标准化记录
-  2. 同业对照产品（register --role peer 登记，只整理与候选特征相关的字段，取值同样经过原文核验）
-  3. 样本摘要目录（~/.medins-research/catalog.json 或工作区 catalog_user.json 中带 overview 的产品，可选）
+  2. 市场样本库：内置 assets/catalog/market_features.json（各产品特征有/无）+ 可选的本机样本摘要目录
+     （~/.medins-research/catalog.json 或工作区 catalog_user.json 中带 overview 的产品）
+  3. 同业对照产品（register --role peer 登记，只整理与候选特征相关的字段，取值同样经过原文核验，可选）
+  4. 全网核验（market_scan.json）：对需要判断的特征联网检索全市场，命中的产品计入对照，“检索未见”记录检索词与来源
 
 判定（候选），某特征“有可比字段的对照产品数”记为 N：
 - N ≥ MIN_PEERS：样本内首见（无对照产品具备）/ 少见差异化（≤2 款或 ≤10%）/ 行业常见/跟进（其余）；
@@ -12,23 +14,32 @@
   · 先验为“普遍/较常见” → 行业常见/跟进（先验）
   · 小样本中已有 ≥2 款对照产品具备 → 行业常见/跟进（小样本）
   · 其余 → 样本不足·待补对照（next 会引导补充同业对照产品，或说明原因后跳过）
+- 全网核验后：检索未见 → 全网未见同类（截至检索日）；有命中 → 按“样本 + 全网命中”重新计数（≥3 款为行业常见/跟进）
 - 本系列新增：相对同系列上一版本新出现（来自版本对比）
-“首见”只代表样本内，不代表全市场；营销稿/媒体（C/D 级）支撑的特征一律标“待正式条款核实”。
+未做全网核验的“首见/少见”只代表对照样本；营销稿/媒体（C/D 级）支撑的特征一律标“待正式条款核实”。
 """
 from __future__ import annotations
 
+import os
 import re
 
 from .catalog import load_catalog
 from .common import load_asset_json, now_iso, read_json, write_json
 from .compare import auto_version_pairs
+from .market import hits_for, load_scan, same_product
+from .market import signature as market_signature
 from .normalize import core_key, name_key
 from .records import load_record
 from .workspace import Workspace
 
 MIN_PEERS = 5
 INSUFFICIENT = "样本不足·待补对照"
-ORDER = {"样本内首见": 0, "少见差异化": 1, INSUFFICIENT: 2}
+NOT_FOUND = "全网未见同类"
+
+
+def rank(verdict: str) -> int:
+    v = str(verdict or "")
+    return 0 if v in (NOT_FOUND, "样本内首见") else 1 if v.startswith("少见差异化") else 2 if v == INSUFFICIENT else 3
 
 
 def load_features() -> list[dict]:
@@ -68,14 +79,24 @@ def record_texts(rec: dict, fields: list[str]) -> list[str]:
 
 
 def baseline_entries(ws: Workspace, exclude_names: set[str]) -> list[dict]:
-    out = []
+    """市场样本库：本机样本摘要（有原文摘要，优先）+ 内置市场样本特征表（有/无标记），按产品名去重。"""
+    out, seen = [], set(exclude_names)
     for e in load_catalog(ws.root):
-        if not e.get("overview"):
+        k = core_key(e["product_name"])
+        if not e.get("overview") or k in seen:
             continue
-        if core_key(e["product_name"]) in exclude_names:
-            continue
+        seen.add(k)
         out.append({"name": f"{e['company']}·{e['product_name']}", "launch": e.get("launch") or e["overview"].get("launch_date", ""),
                     "source": f"样本摘要目录（{e.get('overview_as_of', '')}）", "texts": e["overview"]})
+    if os.environ.get("MEDINS_MARKET_SAMPLES", "1") != "0":
+        mk = load_asset_json("catalog/market_features.json", {}) or {}
+        for e in mk.get("products", []):
+            k = core_key(e["product_name"])
+            if k in seen:
+                continue
+            seen.add(k)
+            out.append({"name": f"{e['company']}·{e['product_name']}", "launch": e.get("launch", ""),
+                        "source": f"市场样本特征表（{mk.get('as_of', '')}）", "tags": e.get("features", {})})
     return out
 
 
@@ -123,6 +144,13 @@ def run_innovation(ws: Workspace, pids: list[str] | None = None) -> dict:
                 continue
             peers_with, peers_total = [], 0
             for b in base:
+                if "tags" in b:
+                    if f["key"] not in b["tags"]:
+                        continue
+                    peers_total += 1
+                    if b["tags"][f["key"]]:
+                        peers_with.append({"name": b["name"], "launch": b["launch"], "source": b["source"], "snippet": ""})
+                    continue
                 texts = [b["texts"].get(k, "") for k in f.get("overview", [])]
                 if not any(texts):
                     continue
@@ -145,6 +173,26 @@ def run_innovation(ws: Workspace, pids: list[str] | None = None) -> dict:
             n = len(peers_with)
             share = n / peers_total if peers_total else 0.0
             verdict, flags = _verdict(f, n, peers_total)
+            scan, hits = hits_for(ws, f["key"], set(names.values()))
+            new_hits = [h for h in hits if not any(same_product(h["product"], x["name"]) for x in peers_with)]
+            for h in new_hits:
+                peers_with.append({"name": h["product"], "launch": h.get("launch", ""), "source": f"全网核验（{h.get('url') or h.get('file', '')}）",
+                                   "snippet": (h.get("quote") or "")[:60], "match": h.get("match")})
+            market = {"status": (scan or {}).get("status", ""), "hits": len(hits), "queries": (scan or {}).get("queries", []),
+                      "checked_at": ((scan or {}).get("updated_at") or "")[:10], "note": (scan or {}).get("note", "")}
+            if not is_common(verdict):
+                k_all = n + len(new_hits)
+                if not scan:
+                    flags.append("尚未全网核验：判定只代表对照样本，下结论前须联网检索全市场同类产品（market）")
+                elif new_hits or hits:
+                    verdict = "行业常见/跟进（全网核验）" if k_all >= 3 else f"少见差异化（全网核验已有 {k_all} 款）"
+                    unverified = [h for h in hits if h.get("match") not in ("exact", "fuzzy")]
+                    if unverified:
+                        flags.append(f"全网命中中有 {len(unverified)} 款引文未核验")
+                elif verdict in ("样本内首见", INSUFFICIENT):
+                    verdict = NOT_FOUND
+                    flags.append(f"全网检索未见同类（截至 {market['checked_at']}；检索词：{'；'.join(market['queries'])}；来源：{market['note']}）")
+                share = k_all / (peers_total + len(new_hits)) if (peers_total + len(new_hits)) else share
             earliest = min(peers_with, key=lambda x: _launch_key(x["launch"])) if peers_with else None
             earlier_than_all = bool(peers_with) and _launch_key(launch) < _launch_key(earliest["launch"])
             new_in_series = None
@@ -166,21 +214,22 @@ def run_innovation(ws: Workspace, pids: list[str] | None = None) -> dict:
                 flags.append("取值尚未全部原文核验")
             items.append({
                 "feature": f["key"], "label": f["label"], "category": f["category"], "verdict": verdict,
-                "prior": f.get("prior", ""), "new_in_series": new_in_series, "earliest_in_sample": earlier_than_all,
+                "prior": f.get("prior", ""), "market": market, "new_in_series": new_in_series, "earliest_in_sample": earlier_than_all,
                 "peers_with": n, "peers_total": peers_total, "share": round(share, 3),
                 "peer_examples": sorted(peers_with, key=lambda x: _launch_key(x["launch"]))[:5],
                 "product_snippet": snippet, "evidence": evid[:4], "flags": flags,
             })
-        items.sort(key=lambda x: (ORDER.get(x["verdict"], 3), not x.get("new_in_series"), x["category"]))
+        items.sort(key=lambda x: (rank(x["verdict"]), not x.get("new_in_series"), x["category"]))
         results[pid] = {"product": rec["product"].get("product_name"), "company": rec["product"].get("company"),
                         "launch": launch, "previous_version": prev_of.get(pid), "candidates": items}
     out = {"generated_at": now_iso(),
            "baseline": {"builtin_samples": len(base), "workspace_products": len(recs), "peer_products": len(peer_recs),
                         "peers": [{"pid": k, "name": f"{r['product'].get('company')}·{r['product'].get('product_name')}"}
                                   for k, r in peer_recs.items()],
-                        "min_peers": MIN_PEERS,
+                        "min_peers": MIN_PEERS, "market_signature": market_signature(ws),
+                        "market_checked": len(load_scan(ws).get("features", {})),
                         "note": f"普及度=具备该特征的对照产品/有可比字段的对照产品；对照产品少于 {MIN_PEERS} 款时不判断首见/少见；"
-                                "‘首见’仅指样本内，不代表全市场。"},
+                                "需要判断的特征须全网核验，未核验的‘首见/少见’只代表对照样本。"},
            "products": results}
     write_json(ws.outputs_dir / "创新点候选.json", out)
     return out

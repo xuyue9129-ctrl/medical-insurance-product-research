@@ -18,6 +18,7 @@ from pathlib import Path
 
 from .citations import build_index, refs_for
 from .innovation import needs_judgment
+from .market import describe
 from .common import MedinsError, read_json, today, truncate
 from .records import field_map, load_record
 from .report import BENEFIT_KEYS, CLAIM_KEYS, FORM_KEYS, TOKEN, UNDERWRITING_KEYS
@@ -402,7 +403,8 @@ def build_ppt(ws: Workspace, pids: list[str] | None = None, out: Path | None = N
                  for j in jl]
         judged = bool(cards)
         if not judged:
-            cards = [(c["label"], f"候选：{c['verdict']}", truncate(c.get("product_snippet", ""), 90), "；".join(c.get("flags", [])))
+            cards = [(c["label"], f"候选：{c['verdict']}", truncate(c.get("product_snippet", ""), 90),
+                      describe(c.get("market") or {}) + "；" + "；".join(c.get("flags", [])))
                      for c in info["candidates"] if needs_judgment(c)]
         if not cards:
             continue

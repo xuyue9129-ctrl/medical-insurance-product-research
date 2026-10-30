@@ -1,10 +1,11 @@
 """生成 Excel 对比表。按样本自动选择两种版式（--mode 可强制指定）：
 
 series（同一系列的多个版本/计划）：
-  说明 | ① 系列总览 | ② 保障责任明细 | ③ 保费对比 | ④ 健告与既往症 | ⑤ 版本对比 | ⑥ 创新点识别 | ⑦ 证据索引 | ⑧ 资料清单 | ⑨ 校验结果
+  说明 | ① 系列总览 | ② 保障责任明细 | ③ 保费对比 | ④ 健告与既往症 | ⑤ 版本对比 | ⑥ 创新点识别 | ⑦ 全网核验 | ⑧ 证据索引 | ⑨ 资料清单 |
+  ⑩ 校验结果
 market（不同公司/系列的多产品横比）：
   说明 | ① 产品总览 | ② 严重既往症对比 | ③ 产品演进与趋势 | ④ 核心发现 | ⑤ 维度对比 | ⑥ 保障责任明细 | ⑦ 保费对比 |
-  ⑧ 健告与既往症 | ⑨ 创新点识别 | ⑩ 证据索引 | ⑪ 资料清单 | ⑫ 校验结果
+  ⑧ 健告与既往症 | ⑨ 创新点识别 | ⑩ 全网核验 | ⑪ 证据索引 | ⑫ 资料清单 | ⑬ 校验结果
 """
 from __future__ import annotations
 
@@ -216,6 +217,7 @@ def _finish(ws, landscape=True):
 
 def build_workbook(ws_: Workspace, pids: list[str] | None = None, out: Path | None = None, title: str = "",
                    mode: str = "auto") -> Path:
+    from .market import describe
     from .report import resolve_tokens
     pids = [ws_.get(p)["pid"] for p in (pids or ws_.research_pids())]
     if not pids:
@@ -248,10 +250,11 @@ def build_workbook(ws_: Workspace, pids: list[str] | None = None, out: Path | No
 
     wb = Workbook()
     wb.remove(wb.active)
-    order = (["说明", "系列总览", "保障责任明细", "保费对比", "健告与既往症", "版本对比", "创新点识别", "证据索引", "资料清单", "校验结果"]
+    order = (["说明", "系列总览", "保障责任明细", "保费对比", "健告与既往症", "版本对比", "创新点识别", "全网核验", "证据索引", "资料清单",
+              "校验结果"]
              if mode == "series" else
              ["说明", "产品总览", "严重既往症对比", "产品演进与趋势", "核心发现", "维度对比", "保障责任明细", "保费对比", "健告与既往症",
-              "创新点识别", "证据索引", "资料清单", "校验结果"])
+              "创新点识别", "全网核验", "证据索引", "资料清单", "校验结果"])
     circled = "①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮"
     sheet_name = {n: (n if i == 0 else f"{circled[i - 1]} {n}") for i, n in enumerate(order)}
 
@@ -665,11 +668,12 @@ def build_workbook(ws_: Workspace, pids: list[str] | None = None, out: Path | No
         s = wb.create_sheet(sheet_name["创新点识别"])
         base = inn.get("baseline", {})
         peers = "、".join(x["name"] for x in base.get("peers", []))
-        _title(s, "创新点识别", f"对照样本：样本摘要目录 {base.get('builtin_samples', 0)} 款 + 本次研究 {base.get('workspace_products', 0)} 款 + "
+        _title(s, "创新点识别", f"对照样本：市场样本库 {base.get('builtin_samples', 0)} 款 + 本次研究 {base.get('workspace_products', 0)} 款 + "
                f"同业对照 {base.get('peer_products', 0)} 款{('（' + peers + '）') if peers else ''}；对照产品少于 {base.get('min_peers', 5)} 款的特征"
-               "不判断首见/少见。"
+               "不判断首见/少见；可能的创新点须全网核验（见“全网核验”列与工作表）。"
                "判定为候选，“首见”仅指样本内；研究者结论来自 analysis.json。", 11)
-        _header(s, 4, ["产品", "特征", "类别", "候选判定", "研究者结论", "本系列新增", "样本普及度", "同业示例（最早在前）", "产品原文依据", "来源", "结论边界/提示"])
+        _header(s, 4, ["产品", "特征", "类别", "候选判定", "研究者结论", "本系列新增", "样本普及度", "全网核验", "同业示例（最早在前）",
+                       "产品原文依据", "来源", "结论边界/提示"])
         r = 5
         judg = analysis.get("innovations") or {}
         for pid, info in (inn.get("products") or {}).items():
@@ -680,7 +684,7 @@ def build_workbook(ws_: Workspace, pids: list[str] | None = None, out: Path | No
                 vals = [f"{info['company']}·{info['product']}", c["label"], c["category"], c["verdict"],
                         (f"{j.get('verdict', '')}：{text(j.get('summary', ''))}".strip("：") if j else ""),
                         {True: "是", False: "否", None: "—"}[c.get("new_in_series")],
-                        f"{c['peers_with']}/{c['peers_total']}",
+                        f"{c['peers_with']}/{c['peers_total']}", describe(c.get("market") or {}),
                         "\n".join(f"{x['name']}（{x['launch'] or '时间待核'}）" for x in c["peer_examples"][:3]) or "无",
                         "\n".join(f"「{truncate(x.get('quote') or '', 80)}」" for x in ev[:2]) or c.get("product_snippet", ""),
                         "\n".join(f"{x.get('doc')} 第{x.get('page')}页 证据{x.get('evidence_level')}" for x in ev[:2]),
@@ -692,8 +696,39 @@ def build_workbook(ws_: Workspace, pids: list[str] | None = None, out: Path | No
                 r += 1
         if r == 5:
             _put(s, 5, 1, "尚未运行 innovate", color=GREY_TXT)
-        _widths(s, [26, 22, 10, 12, 40, 8, 10, 34, 46, 26, 34])
+        _widths(s, [26, 22, 10, 14, 40, 8, 10, 22, 34, 46, 26, 34])
         s.freeze_panes = "C5"
+        _autoheight(s, 5, max(5, r - 1))
+        _finish(s)
+
+    # ---------- 全网核验 ----------
+    def sh_market():
+        from .market import load_scan
+        s = wb.create_sheet(sheet_name["全网核验"])
+        _title(s, "全网核验记录", "判断创新时对照整个市场：对可能的创新点联网检索同类产品。命中的产品附链接与页面原文（已下载页面核验，副本在工作区 market/）；"
+               "未命中的记录检索词与来源。", 10)
+        _header(s, 4, ["特征", "结果", "同类产品", "上市时间", "页面原文", "核验", "证据等级", "链接/页面副本", "检索词", "查过的来源/说明", "记录时间"])
+        r = 5
+        for k, f in load_scan(ws_).get("features", {}).items():
+            rows = f.get("hits") or [None]
+            for h in rows:
+                vals = [f.get("label") or k, "命中" if h else "检索未见",
+                        (h or {}).get("product", ""), (h or {}).get("launch", ""), (h or {}).get("quote", ""),
+                        (h or {}).get("match", ""), (h or {}).get("evidence_level", ""),
+                        (h or {}).get("url") or (h or {}).get("file", ""), "；".join(f.get("queries", [])),
+                        (h or {}).get("note", "") if h else f.get("note", ""), ((h or {}).get("checked_at") or f.get("updated_at") or "")[:10]]
+                for j, x in enumerate(vals, 1):
+                    link = x if j == 8 and str(x).startswith("http") else (
+                        (ws_.root / x).as_uri() if j == 8 and x and (ws_.root / str(x)).exists() else None)
+                    c = _put(s, r, j, x, bold=j == 1, center=j in (2, 4, 6, 7, 11), link=link)
+                    if j == 2:
+                        c.font = _font(True, "C00000" if h is None else "006100")
+                r += 1
+        if r == 5:
+            _put(s, 5, 1, "尚未做全网核验（market）。未核验的“首见/少见”只代表对照样本。", color=GREY_TXT)
+            s.merge_cells(start_row=5, start_column=1, end_row=5, end_column=11)
+        _widths(s, [22, 9, 26, 9, 46, 8, 8, 36, 30, 30, 11])
+        s.freeze_panes = "B5"
         _autoheight(s, 5, max(5, r - 1))
         _finish(s)
 
@@ -764,7 +799,7 @@ def build_workbook(ws_: Workspace, pids: list[str] | None = None, out: Path | No
 
     builders = {"说明": sh_readme, "系列总览": sh_series_overview, "产品总览": sh_market_overview, "严重既往症对比": sh_preexisting,
                 "产品演进与趋势": sh_evolution, "核心发现": sh_findings, "维度对比": sh_dimension, "保障责任明细": sh_benefits,
-                "保费对比": sh_premium, "健告与既往症": sh_hd, "版本对比": sh_versions, "创新点识别": sh_innov, "证据索引": sh_evidence,
+                "保费对比": sh_premium, "健告与既往症": sh_hd, "版本对比": sh_versions, "创新点识别": sh_innov, "全网核验": sh_market, "证据索引": sh_evidence,
                 "资料清单": sh_docs, "校验结果": sh_validation}
     for n in order:
         builders[n]()
@@ -792,7 +827,8 @@ SHEET_DESC = {
     "保费对比": "50 岁保费口径汇总，以及逐行引自费率表的分年龄费率（46–50 岁档高亮）",
     "健告与既往症": "投保端健康告知与准入、理赔端既往症与等待期的逐字对比",
     "版本对比": "新旧版本逐字段变化、方向判断（候选）与依据页码",
-    "创新点识别": "特征候选判定、样本普及度、同业示例、原文依据与研究者结论",
+    "创新点识别": "特征候选判定、样本普及度、全网核验结果、同业示例、原文依据与研究者结论",
+    "全网核验": "对可能的创新点联网检索全市场同类产品的记录：命中产品、页面原文与核验结果、检索词与来源",
     "证据索引": "全部 [E#] 证据：原文引文、文件（可点击打开）、页码、匹配方式、证据等级、来源链接",
     "资料清单": "归档文件、证据等级、版本核对、SHA256、来源与资料缺口",
     "校验结果": "validate 的 error / warning 明细",

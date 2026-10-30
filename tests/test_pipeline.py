@@ -154,7 +154,8 @@ class PipelineTest(TempWorkspaceCase):
             # 同系列两版本 → 系列版式
             wb = openpyxl.load_workbook(build_workbook(self.ws))
             self.assertEqual(wb.sheetnames[:3], ["说明", "① 系列总览", "② 保障责任明细"])
-            ev_sheet = wb["⑦ 证据索引"]
+            self.assertIn("⑦ 全网核验", wb.sheetnames)
+            ev_sheet = wb["⑧ 证据索引"]
             self.assertEqual(ev_sheet.cell(5, 1).value, "E1")
             self.assertGreater(ev_sheet.max_row, 10)
             hd_labels = [wb["④ 健告与既往症"].cell(r, 1).value for r in range(5, 30)]
