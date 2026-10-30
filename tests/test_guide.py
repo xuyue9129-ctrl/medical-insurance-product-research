@@ -82,6 +82,32 @@ class GuideTest(TempWorkspaceCase):
         self.assertTrue(all(r["applied"] for r in res), res)
         self.assertEqual(load_record(self.ws, pid)["fields"]["deductible"]["status"], "原文核验")
 
+        # 其余字段处理完 → 校验 → 对比与创新点 → 对照不足 → 补充同业对照（或说明原因跳过）→ 撰写对比判断
+        import medins
+        from medins_lib.compare import run_compare
+        from medins_lib.innovation import run_innovation
+        from medins_lib.validate import validate_all
+        rest = [{"field": f, "status": "不适用", "note": "测试"} for f in load_record(self.ws, pid)["fields"]
+                if load_record(self.ws, pid)["fields"][f]["status"] in ("未填", "规则抽取") and f != "preexisting_general"]
+        rest.append({"field": "preexisting_general", "status": "推定", "value": "一般既往症可赔，首年按约定比例×50%", "note": "测试"})
+        self.assertTrue(all(r["applied"] for r in apply_patch(self.ws, pid, rest)))
+        self.assertEqual(next_steps(self.ws)["stage"], "校验")
+        self.assertEqual(validate_all(self.ws)["totals"]["errors"], 0)
+        self.assertEqual(next_steps(self.ws)["stage"], "对比与创新点")
+        run_compare(self.ws)
+        run_innovation(self.ws)
+        r = next_steps(self.ws)
+        self.assertEqual(r["stage"], "补充同业对照")
+        self.assertIn("一般既往症可赔", r["steps"][0]["do"])
+        self.assertIn("--role peer", r["steps"][1]["cmd"])
+        self.assertEqual(medins.main(["peers", "-w", str(self.ws.root), "--skip", "--reason", "测试"]), 0)
+        self.assertEqual(next_steps(self.ws)["stage"], "撰写对比判断")
+        # 登记同业对照后：先整理同业产品（只需条款与对照字段），整理完再要求重新识别创新点
+        self.ws.register({"company": "另一家健康", "product_name": "另一款免健告医疗", "role": "peer"})
+        r = next_steps(self.ws)
+        self.assertEqual(r["stage"], "收集资料")
+        self.assertIn("同业对照", r["steps"][0]["do"])
+
 
 if __name__ == "__main__":
     unittest.main()

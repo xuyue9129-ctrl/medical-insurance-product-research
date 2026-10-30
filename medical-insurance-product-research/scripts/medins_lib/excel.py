@@ -217,7 +217,7 @@ def _finish(ws, landscape=True):
 def build_workbook(ws_: Workspace, pids: list[str] | None = None, out: Path | None = None, title: str = "",
                    mode: str = "auto") -> Path:
     from .report import resolve_tokens
-    pids = [ws_.get(p)["pid"] for p in (pids or list(ws_.products()))]
+    pids = [ws_.get(p)["pid"] for p in (pids or ws_.research_pids())]
     if not pids:
         raise MedinsError("工作区没有产品")
     prods = [ws_.get(p) for p in pids]
@@ -664,7 +664,10 @@ def build_workbook(ws_: Workspace, pids: list[str] | None = None, out: Path | No
     def sh_innov():
         s = wb.create_sheet(sheet_name["创新点识别"])
         base = inn.get("baseline", {})
-        _title(s, "创新点识别", f"市场基线：样本摘要目录 {base.get('builtin_samples', 0)} 款 + 本次研究 {base.get('workspace_products', 0)} 款。"
+        peers = "、".join(x["name"] for x in base.get("peers", []))
+        _title(s, "创新点识别", f"对照样本：样本摘要目录 {base.get('builtin_samples', 0)} 款 + 本次研究 {base.get('workspace_products', 0)} 款 + "
+               f"同业对照 {base.get('peer_products', 0)} 款{('（' + peers + '）') if peers else ''}；对照产品少于 {base.get('min_peers', 5)} 款的特征"
+               "不判断首见/少见。"
                "判定为候选，“首见”仅指样本内；研究者结论来自 analysis.json。", 11)
         _header(s, 4, ["产品", "特征", "类别", "候选判定", "研究者结论", "本系列新增", "样本普及度", "同业示例（最早在前）", "产品原文依据", "来源", "结论边界/提示"])
         r = 5
@@ -684,7 +687,7 @@ def build_workbook(ws_: Workspace, pids: list[str] | None = None, out: Path | No
                         "；".join(c.get("flags", []) + ([j["boundary"]] if j.get("boundary") else []))]
                 for k, x in enumerate(vals, 1):
                     cell = _put(s, r, k, x)
-                    if k == 4 and c["verdict"] != "行业常见/跟进":
+                    if k == 4 and not c["verdict"].startswith("行业常见"):
                         cell.font = _font(True, "C00000")
                 r += 1
         if r == 5:

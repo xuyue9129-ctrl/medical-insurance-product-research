@@ -173,6 +173,8 @@ def cmd_register(args):
                  ("access_channel", args.access), ("body_type", args.body_type), ("launch", args.launch), ("insurer_full", args.insurer_full)):
         if v:
             meta[k] = v
+    if args.role:
+        meta["role"] = "peer" if args.role == "peer" else ""
     if args.clause_name:
         meta["clause_names"] = list(dict.fromkeys((meta.get("clause_names") or []) + args.clause_name))
     if meta.get("company") and not meta.get("insurer_full"):
@@ -187,7 +189,8 @@ def cmd_register(args):
                                        "launch", "clause_names")}
         entry["origin"] = "workspace"
         add_to_catalog(entry, ws.root)
-    _out(args, p, lambda d: print(f"已登记 {d['pid']}：{d['company']}·{d['product_name']}\n  归档目录：{ws.root / d['archive_dir']}"
+    _out(args, p, lambda d: print(f"已登记 {d['pid']}：{d['company']}·{d['product_name']}{'（同业对照）' if d.get('role') == 'peer' else ''}"
+                                  f"\n  归档目录：{ws.root / d['archive_dir']}"
                                   + (f"\n  备案条款：{'；'.join(d.get('clause_names') or [])}" if d.get("clause_names") else "")))
 
 
@@ -197,7 +200,8 @@ def cmd_list(args):
 
     def human(d):
         for pid, p in d.items():
-            print(f"{pid}  {p['company']}·{p['product_name']}  系列={p.get('series') or '—'}  条款={'；'.join(p.get('clause_names') or []) or '未登记'}")
+            print(f"{pid}  {p['company']}·{p['product_name']}{'  [同业对照]' if p.get('role') == 'peer' else ''}  系列={p.get('series') or '—'}  "
+                  f"条款={'；'.join(p.get('clause_names') or []) or '未登记'}")
     _out(args, prods, human)
 
 
@@ -474,13 +478,16 @@ def cmd_compare(args):
 
 
 def cmd_innovate(args):
-    from medins_lib.innovation import run_innovation
+    from medins_lib.innovation import needs_judgment, run_innovation
     ws = _ws(args)
     res = run_innovation(ws, args.pids or None)
 
     def human(d):
+        b = d["baseline"]
+        print(f"对照样本：样本摘要目录 {b['builtin_samples']} 款 + 本次研究 {b['workspace_products']} 款 + 同业对照 {b['peer_products']} 款"
+              f"（某特征的对照产品少于 {b['min_peers']} 款时不判断首见/少见）")
         for pid, info in d["products"].items():
-            top = [c for c in info["candidates"] if c["verdict"] != "行业常见/跟进" or c.get("new_in_series")]
+            top = [c for c in info["candidates"] if needs_judgment(c)]
             print(f"■ {info['company']}·{info['product']}：候选 {len(top)} 项")
             for c in top:
                 print(f"   - {c['label']}：{c['verdict']}{'，本系列新增' if c.get('new_in_series') else ''}（{c['peers_with']}/{c['peers_total']}）{'；'.join(c['flags'])}")
@@ -533,6 +540,37 @@ def cmd_ppt(args):
                   "" if args.no_template else args.template, args.org or "")
     _out(args, r, lambda d: print(f"PPT：{d['pptx']}（{d['slides']} 页{'，模板 ' + d['template'] if d['template'] else ''}）" +
                                   "".join(f"\n  ⚠ {x}" for x in d["warnings"])))
+
+
+def cmd_peers(args):
+    from medins_lib.common import now_iso
+    from medins_lib.innovation import MIN_PEERS, insufficient_features, peer_fields, suggest_peers
+    ws = _ws(args)
+    cfg = ws.load()
+    if args.skip:
+        if not args.reason:
+            raise MedinsError("跳过补充同业对照需要 --reason 写明原因（会写入结论边界提示）")
+        cfg["peer_skip"] = {"reason": args.reason, "at": now_iso()}
+        ws.save(cfg)
+        _out(args, cfg["peer_skip"], lambda d: print(f"已记录跳过原因：{d['reason']}。对比判断中“样本不足”的特征必须在 boundary 写明样本范围。继续运行 next。"))
+        return
+    lack = insufficient_features(ws)
+    res = {"min_peers": MIN_PEERS, "features": [f["label"] for f in lack], "peer_fields": peer_fields(ws),
+           "current_peers": [ws.get(p)["product_name"] for p in ws.peer_pids()], "suggestions": suggest_peers(ws, args.limit)}
+
+    def human(d):
+        print(f"需要补对照的特征：{'、'.join(d['features']) or '无（对照样本已足够）'}")
+        from medins_lib.records import field_map
+        fm = field_map()
+        print(f"同业对照产品只需整理这些字段：{'、'.join(fm[k]['label'] if k in fm else k for k in d['peer_fields'])}")
+        if d["current_peers"]:
+            print(f"已登记的同业对照：{'、'.join(d['current_peers'])}")
+        print("推荐的同业对照产品（同类型、不同系列；优先有官网链接）：")
+        for s_ in d["suggestions"]:
+            print(f"  {s_['id']}  {s_['company']}·{s_['product_name']}  {s_['product_type'] or ''}  {(s_['source_urls'] or [''])[0]}")
+        print(f"登记：python <SKILL_DIR>/scripts/medins.py register -w \"{ws.root}\" --from-catalog <id> --role peer")
+        print(f"跳过：python <SKILL_DIR>/scripts/medins.py peers -w \"{ws.root}\" --skip --reason \"<原因>\"")
+    _out(args, res, human)
 
 
 def cmd_next(args):
@@ -666,6 +704,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--launch", help="上市时间 YYYY-MM")
     p.add_argument("--clause-name", action="append", help="备案条款名（可多次）")
     p.add_argument("--add-to-catalog", action="store_true", help="同时写入工作区目录，便于后续模糊检索")
+    p.add_argument("--role", choices=["research", "peer"], help="peer=同业对照产品（只作创新点识别的对照样本，不进对比表/报告）")
     add("list", cmd_list, "列出工作区产品")
     p = add("fetch", cmd_fetch, "下载并归档资料（自动分类、哈希、版本核对、证据等级）")
     p.add_argument("--pid", required=True)
@@ -755,6 +794,10 @@ def build_parser() -> argparse.ArgumentParser:
             p.add_argument("--template", help="自有 .pptx 模板（默认读 ~/.medins-research/config.json 的 ppt_template）")
             p.add_argument("--no-template", action="store_true", help="忽略默认模板，使用内置版式")
             p.add_argument("--org", help="封面署名（部门/机构）")
+    p = add("peers", cmd_peers, "补充同业对照：列出需要对照的特征与推荐产品；--skip --reason 说明原因后跳过")
+    p.add_argument("--limit", type=int, default=10)
+    p.add_argument("--skip", action="store_true")
+    p.add_argument("--reason")
     p = add("deliver", cmd_deliver, "登记用户是否需要分析报告与汇报 PPT（对比表完成后询问用户）")
     p.add_argument("--report", required=True, choices=["yes", "no"])
     p.add_argument("--ppt", required=True, choices=["yes", "no"])

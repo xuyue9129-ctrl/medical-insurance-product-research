@@ -19,9 +19,17 @@ def validate_product(ws: Workspace, pid: str, reverify: bool = True) -> dict:
     p = ws.get(pid)
     pid = p["pid"]
     errors, warnings, info = [], [], []
+    peer = p.get("role") == "peer"  # 同业对照：只需条款原件与对照字段
+    scope = None
+    if peer:
+        from .innovation import peer_fields
+        scope = set(peer_fields(ws))
+        info.append("同业对照产品：只校验条款原件与对照字段（" + "、".join(field_map()[k]["label"] for k in scope if k in field_map()) + "）")
     m = load_manifest(ws, pid)
     comp = completeness(m)
     for code, st in comp.items():
+        if peer and code != "01":
+            continue
         if st.startswith("缺失"):
             errors.append(f"资料：{code} {DOC_TYPES[code]} 缺失且未登记原因（找不到请用 `gap` 登记“未找到可确认文件/待取得原件”）")
         elif st in ("未找到可确认文件", "待取得原件"):
@@ -49,7 +57,7 @@ def validate_product(ws: Workspace, pid: str, reverify: bool = True) -> dict:
         st = f.get("status", "未填")
         stats[st] = stats.get(st, 0) + 1
         if st == "未填":
-            if fm.get(key, {}).get("required"):
+            if (key in scope) if scope is not None else fm.get(key, {}).get("required"):
                 errors.append(f"字段：{label} 未处理（必填；取不到请标“待核”并写原因）")
             continue
         if st == "待复核":
@@ -106,7 +114,7 @@ def validate_product(ws: Workspace, pid: str, reverify: bool = True) -> dict:
 
 
 def validate_all(ws: Workspace, pids: list[str] | None = None) -> dict:
-    pids = pids or list(ws.products())
+    pids = pids or list(ws.products())  # 含同业对照产品（按对照范围校验）
     res = [validate_product(ws, pid) for pid in pids]
     report = {"generated_at": now_iso(), "products": res,
               "totals": {"errors": sum(len(r["errors"]) for r in res), "warnings": sum(len(r["warnings"]) for r in res)}}

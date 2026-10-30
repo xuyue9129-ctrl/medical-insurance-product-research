@@ -23,6 +23,7 @@
 | 费率 | `rates list --pid X` / `rates import --pid X --block N --columns ... --col-index ... --basis ...` | 费率表分块与搬运 |
 | 校验 | `validate [--strict]` | 资料完整度、版本、引文复核、数值一致性、口径 |
 | 分析 | `compare [--pair 旧:新]` / `innovate` | 横向/版本对比；创新点候选 |
+| 同业对照 | `peers` / `register --from-catalog <id> --role peer` / `peers --skip --reason R` | 对照样本不足 5 款时补充同业产品（只整理对照字段），或说明原因后跳过 |
 | 输出 | `build`（= validate→compare→innovate→excel，`--mode series/market`）/ `deliver` / `report [--no-docx]` / `ppt [--template]` | 对比表；询问用户后按需出报告与 PPT |
 | 目录 | `catalog-add --company C --product P [--user-level]` | 把新产品加入目录，下次可模糊命中 |
 

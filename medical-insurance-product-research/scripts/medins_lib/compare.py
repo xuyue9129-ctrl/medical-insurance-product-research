@@ -171,7 +171,7 @@ def auto_version_pairs(ws: Workspace, pids: list[str]) -> list[tuple[str, str]]:
 
 
 def run_compare(ws: Workspace, pids: list[str] | None = None, pairs: list[tuple[str, str]] | None = None) -> dict:
-    pids = [ws.get(p)["pid"] for p in (pids or list(ws.products()))]
+    pids = [ws.get(p)["pid"] for p in (pids or ws.research_pids())]
     pairs = [(ws.get(a)["pid"], ws.get(b)["pid"]) for a, b in pairs] if pairs else auto_version_pairs(ws, pids)
     out = {"generated_at": now_iso(), "cross": cross_compare(ws, pids), "versions": [version_diff(ws, a, b) for a, b in pairs]}
     write_json(ws.outputs_dir / "对比结果.json", out)

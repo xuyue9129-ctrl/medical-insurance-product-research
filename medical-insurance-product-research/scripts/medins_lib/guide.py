@@ -35,16 +35,28 @@ def _cmd(ws: Workspace, sub: str) -> str:
     return f'python <SKILL_DIR>/scripts/medins.py {sub} -w "{ws.root}"'
 
 
-def _pending_fields(rec: dict, required_only: bool = False) -> list[dict]:
+def _pending_fields(rec: dict, required_only: bool = False, only: list[str] | None = None) -> list[dict]:
+    """待处理字段；only 给定时（同业对照产品）只看这些字段，且都视为必填。"""
     out = []
     for f in schema_fields():
         st = rec["fields"].get(f["key"], {}).get("status", "未填")
         if st in DONE:
             continue
+        if only is not None:
+            if f["key"] in only:
+                out.append(f)
+            continue
         if required_only and not f.get("required"):
             continue
         out.append(f)
     return out
+
+
+def _scope(ws: Workspace, p: dict) -> list[str] | None:
+    if p.get("role") != "peer":
+        return None
+    from .innovation import peer_fields
+    return peer_fields(ws)
 
 
 def next_steps(ws: Workspace) -> dict:
@@ -63,11 +75,12 @@ def next_steps(ws: Workspace) -> dict:
         m = load_manifest(ws, pid)
         docs = m["documents"]
         rec = load_record(ws, pid)
-        pend_req = _pending_fields(rec, True)
-        pend_all = _pending_fields(rec)
-        progress.append({"pid": pid, "product": p["product_name"], "documents": len(docs),
+        scope = _scope(ws, p)
+        pend_req = _pending_fields(rec, True, scope)
+        pend_all = _pending_fields(rec, False, scope)
+        progress.append({"pid": pid, "product": p["product_name"] + ("（同业对照）" if scope is not None else ""), "documents": len(docs),
                          "required_pending": len(pend_req), "all_pending": len(pend_all)})
-        name = p["product_name"]
+        name = p["product_name"] + ("（同业对照，只需条款与对照字段）" if scope is not None else "")
         if not docs:
             return {"stage": "收集资料", "done": False, "progress": progress, "steps": [
                 {"do": f"【{name}】有本地资料就导入（推荐，最快）", "cmd": _cmd(ws, "import") + f' --pid {pid} "<本地资料目录>"'},
@@ -83,7 +96,7 @@ def next_steps(ws: Workspace) -> dict:
                  "cmd": _cmd(ws, "register") + f" --pid {pid} {args}"},
                 {"do": "重新核对全部文件版本", "cmd": _cmd(ws, "verify-docs") + f" --pid {pid}"}]}
         comp = completeness(m)
-        missing = [c for c, s in comp.items() if s.startswith("缺失")]
+        missing = [c for c, s in comp.items() if s.startswith("缺失") and (scope is None or c == "01")]
         if missing:
             c = missing[0]
             return {"stage": "补齐资料", "done": False, "progress": progress, "steps": [
@@ -100,12 +113,29 @@ def next_steps(ws: Workspace) -> dict:
                 {"do": "（可选）一次生成全部待填字段的补丁骨架，逐项改值后一起 apply",
                  "cmd": _cmd(ws, "template") + f" --pid {pid}"}]}
     rep = read_json(ws.outputs_dir / "校验报告.json")
-    if rep is None or rep.get("totals", {}).get("errors", 1):
+    if rep is None or rep.get("totals", {}).get("errors", 1) or {r["pid"] for r in rep.get("products", [])} != set(prods):
         return {"stage": "校验", "done": False, "progress": progress, "steps": [
             {"do": "运行校验；有 error 就按提示逐条修正（重新 record apply 对应字段），直到 error=0", "cmd": _cmd(ws, "validate")}]}
-    if read_json(ws.outputs_dir / "创新点候选.json") is None:
+    inn = read_json(ws.outputs_dir / "创新点候选.json")
+    if inn is None:
         return {"stage": "对比与创新点", "done": False, "progress": progress, "steps": [
             {"do": "生成横向/版本对比与创新点候选", "cmd": _cmd(ws, "compare") + " && " + _cmd(ws, "innovate")}]}
+    if {x["pid"] for x in (inn.get("baseline") or {}).get("peers", [])} != set(ws.peer_pids()):
+        return {"stage": "重新识别创新点", "done": False, "progress": progress, "steps": [
+            {"do": "同业对照产品已整理完，重新运行创新点识别（对照样本会计入新增的同业产品）", "cmd": _cmd(ws, "innovate")}]}
+    from .innovation import INSUFFICIENT, MIN_PEERS, insufficient_features
+    lack = insufficient_features(ws)
+    if lack and not cfg.get("peer_skip"):
+        totals = [c["peers_total"] for info in (inn.get("products") or {}).values() for c in info["candidates"] if c["verdict"] == INSUFFICIENT]
+        need = max(1, MIN_PEERS - min(totals or [0]))
+        return {"stage": "补充同业对照", "done": False, "progress": progress, "steps": [
+            {"do": f"以下候选特征的对照样本不足 {MIN_PEERS} 款，不能判断是否首见/少见：{'、'.join(f['label'] for f in lack)}。"
+                   f"先查看推荐的同业对照产品（同类型、不同系列，附官网链接）", "cmd": _cmd(ws, "peers")},
+            {"do": f"挑选至少 {need} 款与研究对象同类的产品登记为同业对照（可用推荐列表的 id；目录外产品用 --company/--product）。"
+                   "登记后 next 会引导：归档其条款 → 登记备案条款名 → 只整理与上述特征相关的字段（同样逐字引文核验）",
+             "cmd": _cmd(ws, "register") + " --from-catalog <id> --role peer"},
+            {"do": "确实无法补充（如无联网、同类产品条款取不到）时，写明原因后跳过；对比判断的结论边界必须写明样本不足",
+             "cmd": _cmd(ws, "peers") + ' --skip --reason "<原因>"'}]}
     if not comparison_judged(ws):
         steps = [{"do": "生成 analysis.json 骨架（已填好版本对与候选特征）", "cmd": _cmd(ws, "template") + " --analysis"}]             if not ws.analysis_path.exists() else []
         steps.append({"do": f"打开 {ws.analysis_path}，先完成对比判断：version_notes（每对新旧版本的主要变化）与 innovations"
@@ -151,8 +181,8 @@ def comparison_judged(ws: Workspace) -> bool:
     """有版本对或创新点候选时，要求至少写了一条版本解读或创新点结论。"""
     inn = read_json(ws.outputs_dir / "创新点候选.json", {}) or {}
     cmp = read_json(ws.outputs_dir / "对比结果.json", {}) or {}
-    need = bool(cmp.get("versions")) or any(c["verdict"] != "行业常见/跟进" or c.get("new_in_series")
-                                            for info in (inn.get("products") or {}).values() for c in info["candidates"])
+    from .innovation import needs_judgment
+    need = bool(cmp.get("versions")) or any(needs_judgment(c) for info in (inn.get("products") or {}).values() for c in info["candidates"])
     if not need:
         return True
     a = read_json(ws.analysis_path, {}) or {}
@@ -172,10 +202,11 @@ def task_card(ws: Workspace, pid: str, field: str | None = None) -> dict:
     p = ws.get(pid)
     rec = load_record(ws, p["pid"])
     fm = field_map()
+    scope = _scope(ws, p)
     if field:
         f = fm[resolve_field(field)]
     else:
-        pend = _pending_fields(rec, True) or _pending_fields(rec)
+        pend = _pending_fields(rec, True, scope) or _pending_fields(rec, False, scope)
         if not pend:
             return {"pid": p["pid"], "done": True, "message": "全部字段已处理，运行 next 进入下一阶段"}
         f = pend[0]
@@ -188,9 +219,10 @@ def task_card(ws: Workspace, pid: str, field: str | None = None) -> dict:
             "evidence": [{"doc": (drafts[0]["doc"] if drafts else "<文件名或唯一片段>"),
                           "page": (drafts[0]["page"] if drafts else None),
                           "quote": (drafts[0]["quote"] if drafts else "<从 text 命令输出中逐字复制>")}]}
-    remaining = len(_pending_fields(rec, True)), len(_pending_fields(rec))
+    remaining = len(_pending_fields(rec, True, scope)), len(_pending_fields(rec, False, scope))
     return {
-        "pid": p["pid"], "product": p["product_name"], "field": k, "label": f["label"], "required": bool(f.get("required")),
+        "pid": p["pid"], "product": p["product_name"] + ("（同业对照）" if scope is not None else ""), "field": k, "label": f["label"],
+        "required": bool(f.get("required")) or scope is not None,
         "definition": f.get("desc", ""), "example": f.get("example", ""), "where": where,
         "search_cmd": (_cmd(ws, "text") + f' --pid {p["pid"]} --grep "{grep}"') if grep else "",
         "candidates": drafts, "current": cur if cur.get("status") != "未填" else None,
@@ -209,7 +241,7 @@ def write_template(ws: Workspace, pid: str, out: Path | None = None) -> Path:
     p = ws.get(pid)
     rec = load_record(ws, p["pid"])
     items = []
-    for f in _pending_fields(rec):
+    for f in _pending_fields(rec, False, _scope(ws, p)):
         drafts = (rec.get("drafts") or {}).get(f["key"], [])[:3]
         items.append({"field": f["key"], "_字段": f["label"], "_必填": bool(f.get("required")), "_口径": f.get("desc", ""),
                       "_示例": f.get("example", ""), "_去哪找": "、".join(DOC_TYPES[c] for c in f.get("where", [])),
@@ -229,6 +261,7 @@ def analysis_filled(ws: Workspace) -> bool:
 
 
 def write_analysis_template(ws: Workspace) -> Path:
+    from .innovation import needs_judgment
     inn = read_json(ws.outputs_dir / "创新点候选.json", {}) or {}
     cmp = read_json(ws.outputs_dir / "对比结果.json", {}) or {}
     data = {
@@ -236,8 +269,9 @@ def write_analysis_template(ws: Workspace) -> Path:
         "sections": {"scope": "", "overview": "", "underwriting": "", "benefits": "", "renewal_pricing": ""},
         "version_notes": {f"{v['old']['pid']}->{v['new']['pid']}": "" for v in cmp.get("versions", [])},
         "innovations": {pid: [{"feature": c["feature"], "label": c["label"], "_候选判定": c["verdict"],
-                               "_本系列新增": c.get("new_in_series"), "verdict": "", "summary": "", "risk_logic": "", "boundary": ""}
-                              for c in info["candidates"] if c["verdict"] != "行业常见/跟进" or c.get("new_in_series")]
+                               "_本系列新增": c.get("new_in_series"), "_对照样本": f"{c['peers_with']}/{c['peers_total']} 款具备",
+                               "_提示": "；".join(c.get("flags", [])), "verdict": "", "summary": "", "risk_logic": "", "boundary": ""}
+                              for c in info["candidates"] if needs_judgment(c)]
                         for pid, info in (inn.get("products") or {}).items()},
         "findings": [{"_说明": "多产品横比的核心发现（可选）；finding 一句话观点，detail 写具体产品与变化，logic 写风控逻辑与产品启示，boundary 写结论边界",
                       "finding": "", "detail": "", "logic": "", "boundary": ""}],

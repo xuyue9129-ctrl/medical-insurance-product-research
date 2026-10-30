@@ -17,6 +17,7 @@ import re
 from pathlib import Path
 
 from .citations import build_index, refs_for
+from .innovation import needs_judgment
 from .common import MedinsError, read_json, today, truncate
 from .records import field_map, load_record
 from .report import BENEFIT_KEYS, CLAIM_KEYS, FORM_KEYS, TOKEN, UNDERWRITING_KEYS
@@ -270,7 +271,7 @@ class Deck:
 
 def build_ppt(ws: Workspace, pids: list[str] | None = None, out: Path | None = None, title: str = "",
               template: str | None = None, org: str = "") -> dict:
-    pids = [ws.get(p)["pid"] for p in (pids or list(ws.products()))]
+    pids = [ws.get(p)["pid"] for p in (pids or ws.research_pids())]
     if not pids:
         raise MedinsError("工作区没有产品")
     cfg = user_config()
@@ -402,7 +403,7 @@ def build_ppt(ws: Workspace, pids: list[str] | None = None, out: Path | None = N
         judged = bool(cards)
         if not judged:
             cards = [(c["label"], f"候选：{c['verdict']}", truncate(c.get("product_snippet", ""), 90), "；".join(c.get("flags", [])))
-                     for c in info["candidates"] if c["verdict"] != "行业常见/跟进" or c.get("new_in_series")]
+                     for c in info["candidates"] if needs_judgment(c)]
         if not cards:
             continue
         any_inn = True

@@ -17,6 +17,7 @@ from .citations import build_index, fmt_refs, refs_for
 from .common import MedinsError, read_json, today, truncate, write_text
 from .doctypes import DOC_TYPES
 from .fetch import completeness, load_manifest
+from .innovation import needs_judgment
 from .records import field_map, load_record
 from .workspace import Workspace
 
@@ -84,7 +85,7 @@ def numbered(i: int, text: str) -> str:
 
 def build_report(ws: Workspace, pids: list[str] | None = None, out_dir: Path | None = None, title: str = "",
                  docx: bool = True) -> dict:
-    pids = [ws.get(p)["pid"] for p in (pids or list(ws.products()))]
+    pids = [ws.get(p)["pid"] for p in (pids or ws.research_pids())]
     if not pids:
         raise MedinsError("工作区没有产品")
     prods = [ws.get(p) for p in pids]
@@ -193,15 +194,18 @@ def build_report(ws: Workspace, pids: list[str] | None = None, out_dir: Path | N
     # 四、创新点识别
     L += ["## 四、创新点识别", ""]
     base = inn.get("baseline", {})
-    L += [f"对每款产品的标准化字段做特征打标，与市场基线（样本摘要目录 {base.get('builtin_samples', 0)} 款、本次研究 "
-          f"{base.get('workspace_products', 0)} 款）比较普及度、最早采用时间及是否为本系列新增。“首见”仅指样本内；"
+    peers = "、".join(x["name"] for x in base.get("peers", []))
+    L += [f"对每款产品的标准化字段做特征打标，与对照样本（样本摘要目录 {base.get('builtin_samples', 0)} 款、本次研究 "
+          f"{base.get('workspace_products', 0)} 款、同业对照 {base.get('peer_products', 0)} 款{('：' + peers) if peers else ''}）"
+          f"比较普及度、最早采用时间及是否为本系列新增。某特征的对照产品少于 {base.get('min_peers', 5)} 款时，"
+          "只按行业先验区分“行业常见/跟进”，其余标“样本不足·待补对照”，不判断首见或少见。“首见”仅指样本内；"
           "仅有营销稿或媒体报道（C/D 级）支撑的特征不认定为创新；候选判定之外以研究者结论为准。", ""]
     judg = analysis.get("innovations") or {}
     k = 0
     for pid, info in (inn.get("products") or {}).items():
         jl = judg.get(pid) if isinstance(judg.get(pid), list) else []
         jl = [j for j in jl if (j.get("summary") or "").strip()]
-        cands = [c for c in info["candidates"] if c["verdict"] != "行业常见/跟进" or c.get("new_in_series")]
+        cands = [c for c in info["candidates"] if needs_judgment(c)]
         if not jl and not cands:
             continue
         L += [f"### （{CN_NUM[k] if k < 10 else k + 1}）{info['company']}·{info['product']}", ""]

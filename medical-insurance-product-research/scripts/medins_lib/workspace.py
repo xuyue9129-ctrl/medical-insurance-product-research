@@ -83,6 +83,14 @@ class Workspace:
     def products(self) -> dict[str, dict]:
         return (self.load() or {}).get("products", {})
 
+    def research_pids(self) -> list[str]:
+        """研究对象（进入对比表、报告、PPT）；不含同业对照产品。"""
+        return [pid for pid, p in self.products().items() if p.get("role") != "peer"]
+
+    def peer_pids(self) -> list[str]:
+        """同业对照产品（register --role peer）：只作创新点识别的对照样本。"""
+        return [pid for pid, p in self.products().items() if p.get("role") == "peer"]
+
     def register(self, meta: dict) -> dict:
         """登记产品（公司 + 产品名唯一），返回含 pid 与 archive_dir 的元数据。"""
         company, name = meta.get("company", "").strip(), meta.get("product_name", "").strip()

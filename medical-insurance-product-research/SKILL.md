@@ -38,6 +38,7 @@ python <SKILL_DIR>/scripts/medins.py next -w <工作区>     # ① 看当前阶�
 | 把旧版本条款用于新版本 | 先 `register --clause-name` 登记备案条款名，`verify-docs` 显示 matched 才用 |
 | validate 有 error 就出报告 | error 清零后再 `build` |
 | 对比表做完就直接生成报告/PPT，或直接结束 | 先问用户要不要报告和 PPT，再 `deliver` 登记 |
+| 对照样本只有一两款就写“首见/独创” | 候选为“样本不足·待补对照”时先补同业对照；补不了就在结论边界写明样本不足 |
 
 ## 何时使用
 - 用户给出一个或多个医疗险产品名（可能是简称、错别字、只写年份或系列，如“蓝医保2027”“众民保中高端26”“长相安5号”），要求查条款/费率/健告、整理产品形态、做对比、看版本变化或创新点、出 Excel/报告。
@@ -119,7 +120,7 @@ python <SKILL_DIR>/scripts/medins.py validate -w <工作区>
 python <SKILL_DIR>/scripts/medins.py compare -w <工作区> [--pair 旧pid:新pid]   # 同系列自动按上市时间配对
 python <SKILL_DIR>/scripts/medins.py innovate -w <工作区>
 ```
-`innovate` 只给“候选”（样本内首见/少见差异化/行业常见、是否本系列新增、同业示例）。你要按 [references/innovation_method.md](references/innovation_method.md) 判断是否**真正的创新**（改变了谁能买、赔什么、怎么定价/分层，而不是换个名字或跟进常见责任）。`template --analysis` 生成 `<工作区>/analysis.json` 骨架，先写**对比判断**：
+`innovate` 只给“候选”（样本内首见/少见差异化/行业常见、是否本系列新增、同业示例）。某特征的对照产品不足 5 款时，行业普遍配置按先验判为“行业常见/跟进（先验）”，其余标“样本不足·待补对照”，`next` 会引导你用 `peers` 挑选同业对照产品、`register --from-catalog <id> --role peer` 登记并只整理对照字段（同样逐字引文），再重新 `innovate`；确实补不了就 `peers --skip --reason` 并在结论边界写明。你要按 [references/innovation_method.md](references/innovation_method.md) 判断是否**真正的创新**（改变了谁能买、赔什么、怎么定价/分层，而不是换个名字或跟进常见责任）。`template --analysis` 生成 `<工作区>/analysis.json` 骨架，先写**对比判断**：
 ```json
 {
   "version_notes": {"<旧pid>-><新pid>": "主险由F款换为H款[[<新pid>:clause_names]]；免赔额…[[<新pid>:deductible]]"},
